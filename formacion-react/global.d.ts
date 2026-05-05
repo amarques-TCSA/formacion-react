@@ -1,4 +1,5 @@
 declare module '*.css'
+declare module '@tracasa/tracasa-components/styles/navarra'
 declare module '*.svg' {
   const src: string
   export default src
