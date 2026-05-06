@@ -67,26 +67,26 @@ export default function BuscadorFiltros({ apiRepository, registro }: BuscadorFil
         title="Estado"
       >
         <FormField
-          id="idEstado"
-          labelText="Estado"
+          id="idEstadoSolicitud"
+          labelText="Estado solicitud"
           layout="vertical"
           fullWidth
         >
           <Controller
             control={registro.control}
-            name="idEstado"
+            name="idEstadoSolicitud"
             render={({ field }) => (
               <Selector
                 permitirBusqueda
                 mostrarX={true}
-                id="idEstado"
-                opciones={maestros.estados.map((x) => ({
+                id="idEstadoSolicitud"
+                opciones={maestros.estadosSolicitud.map((x) => ({
                   id: x.id.toString(),
                   texto: x.descripcion,
                 }))}
                 idSeleccionado={field.value?.toString() ?? null}
                 onChange={field.onChange}
-                error={!!registro.formState.errors.idEstado}
+                error={!!registro.formState.errors.idEstadoSolicitud}
               />
             )}
           />
@@ -96,6 +96,7 @@ export default function BuscadorFiltros({ apiRepository, registro }: BuscadorFil
       <RowLayout
         space={1}
         justifyContent="space-between"
+        className="filtros__botones"
       >
         <Button
           variant="secundario"

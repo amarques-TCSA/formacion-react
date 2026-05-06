@@ -28,11 +28,11 @@ export const schema: ObjectSchema<BuscadorForm> = object({
       return true;
     },
   ),
-  idEstado: number().notRequired(),
+  idEstadoSolicitud: number().notRequired(),
 })
 
 export type BuscadorForm = {
   fechaDesde?: string | null;
   fechaHasta?: string | null;
-  idEstado?: number | null;
+  idEstadoSolicitud?: number | null;
 }

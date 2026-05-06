@@ -3,7 +3,7 @@ export type ObtenerMaestrosBuscadorRequest = {
 };
 
 export type ObtenerMaestrosBuscadorResponse = {
-    estados: [{
+    estadosSolicitud: [{
         id: number;
         descripcion: string;
     }],
@@ -18,7 +18,7 @@ export type ObtenerResultadosBuscadorRequest = {
     filtros: {
         fechaDesde?: string | null;
         fechaHasta?: string | null;
-        idEstado?: number | null;
+        idEstadoSolicitud?: number | null;
     }
 };
 
@@ -33,5 +33,5 @@ export type ResultadoBuscador = {
     apellido1: string;
     apellido2: string;
     idEstadoCivil: number;
-    idEstado: number;
+    idEstadoSolicitud: number;
 }

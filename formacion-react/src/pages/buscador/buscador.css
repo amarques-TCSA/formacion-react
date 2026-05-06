@@ -1,0 +1,8 @@
+.filtros__botones {
+  padding: 1.2rem;
+  bottom: 1.2rem;
+  position: absolute;
+  align-self: end;
+  width: 20rem;
+  background-color: var(--background-color-secondary);
+}

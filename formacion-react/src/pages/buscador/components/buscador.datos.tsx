@@ -27,8 +27,8 @@ const columnas: CabeceraListado<Resultado>[] = [
     alinear: 'centro'
   },
   {
-    id: 'estado',
-    texto: 'Estado',
+    id: 'estadoSolicitud',
+    texto: 'Estado solicitud',
     tipo: 'texto',
     tamano: 10,
     alinear: 'izquierda'
@@ -52,7 +52,7 @@ export default function BuscadorDatos({ apiRepository, registro }: BuscadorDatos
     id: resultado.id,
     nombreCompleto: resultado.nombre + ' ' + resultado.apellido1 + ' ' + resultado.apellido2,
     fechaRegistro: dayjs(resultado.fechaRegistro),
-    estado: maestros?.estados.find(e => e.id === resultado.idEstado)?.descripcion || '',
+    estadoSolicitud: maestros?.estadosSolicitud.find(e => e.id === resultado.idEstadoSolicitud)?.descripcion || '',
     estadoCivil: maestros?.estadosCiviles.find(ec => ec.id === resultado.idEstadoCivil)?.descripcion || '',
   }));
 

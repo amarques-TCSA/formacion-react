@@ -14,7 +14,7 @@ type BuscadorPageProps = {
 const filtrosPorDefecto: BuscadorForm = {
   fechaDesde: undefined,
   fechaHasta: undefined,
-  idEstado: undefined,
+  idEstadoSolicitud: undefined,
 };
 
 export default function BuscadorPage({
