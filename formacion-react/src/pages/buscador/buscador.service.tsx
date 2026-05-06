@@ -23,7 +23,7 @@ export const ObtenerResultadosBuscador = (
     {apiRepository, filtros }: ObtenerResultadosBuscadorProps
     ) => {
     return useSuspenseQuery({
-        queryKey: ['buscador', 'resultados'],
+        queryKey: ['buscador', 'resultados', filtros],
         queryFn: async (): Promise<ObtenerResultadosBuscadorResponse> => {
             return apiRepository.obtenerResultadosBuscador({
                 filtros : { ...filtros }

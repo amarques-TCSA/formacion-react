@@ -5,31 +5,33 @@ import { BuscadorForm, schema } from "./models/buscador.schema";
 import { IApiRepository } from "@/shared/repositories/api/api.repository";
 import BuscadorFiltros from "./components/buscador.filtros";
 import BuscadorResultados from "./components/buscador.resultados";
+import { Suspense } from "react";
 
 type BuscadorPageProps = {
-    apiRepository: IApiRepository;
+  apiRepository: IApiRepository;
 }
+
+const filtrosPorDefecto: BuscadorForm = {
+  fechaDesde: undefined,
+  fechaHasta: undefined,
+  idEstado: undefined,
+};
+
 export default function BuscadorPage({
-    apiRepository
+  apiRepository
 }: BuscadorPageProps) {
 
-    const filtrosPorDefecto: BuscadorForm = {
-        fechaDesde: undefined,
-        fechaHasta: undefined,
-        idEstado: undefined,
-    };
+  const registro = useForm<BuscadorForm>({
+    resolver: yupResolver(schema),
+    defaultValues: filtrosPorDefecto,
+  });
 
-    const registro = useForm<BuscadorForm>({
-        resolver: yupResolver(schema),
-        defaultValues: filtrosPorDefecto,
-    });
-
-    return (
-        <LayoutBuscador
-            title="Página de buscador"
-            filtros={<BuscadorFiltros apiRepository={apiRepository} registro={registro} />}
-            contenido={<BuscadorResultados filtros={registro.getValues()} apiRepository={apiRepository}/>}
-        >
-        </LayoutBuscador>
-    );
+  return (
+    <LayoutBuscador
+      title="Página de buscador"
+      filtros={<BuscadorFiltros apiRepository={apiRepository} registro={registro} />}
+      contenido={<Suspense><BuscadorResultados registro={registro} apiRepository={apiRepository} /></Suspense>}
+    >
+    </LayoutBuscador>
+  );
 }
