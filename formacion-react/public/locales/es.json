@@ -10,6 +10,10 @@
     "apellidos": "Apellidos",
     "primerApellido": "Primer apellido",
     "segundoApellido": "Segundo apellido",
-    "lugarNacimiento": "Lugar de nacimiento"
+    "lugarNacimiento": "Lugar de nacimiento",
+    "nacionalidad": "Nacionalidad",
+    "estadoCivil": "Estado civil",
+    "fechaRegistro": "Fecha de registro",
+    "fechaNacimiento": "Fecha de nacimiento"
   }
 }

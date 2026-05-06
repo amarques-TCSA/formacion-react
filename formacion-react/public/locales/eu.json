@@ -10,6 +10,10 @@
     "apellidos": "Abizenak",
     "primerApellido": "Lehen abizena",
     "segundoApellido": "Bigarren abizena",
-    "lugarNacimiento": "Jaioterria"
+    "lugarNacimiento": "Jaioterria",
+    "nacionalidad": "Nacionalitatea",
+    "estadoCivil": "Egoera zibila",
+    "fechaRegistro": "Erregistro data",
+    "fechaNacimiento": "Jaiotze data"
   }
 }
