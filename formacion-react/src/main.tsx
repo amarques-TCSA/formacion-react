@@ -13,7 +13,7 @@ export const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-     <CustomErrorBoundary>
+    <CustomErrorBoundary>
       <ThemeProvider defaultTheme="navarra">
         <QueryClientProvider client={queryClient}>
           <App />
