@@ -1,9 +1,12 @@
-import { BarraHerramientas, Button, FormField, FormGrid, Input, Main, Section } from "@tracasa/tracasa-components";
+import { BarraHerramientas, BarraLateral, Button, FormField, FormGrid, IndiceLateral, Input, Main, Section, SectionGroup } from "@tracasa/tracasa-components";
 import { t } from "i18next";
 import { Controller, useForm } from "react-hook-form";
 
 type ModalCreacionEventoEspecialForm = {
   nombre: string;
+  primerApellido: string;
+  segundoApellido: string;
+  lugarNacimiento: string;
 }
 
 export default function FormularioPage() {
@@ -15,12 +18,15 @@ export default function FormularioPage() {
     mode: 'onChange',
     defaultValues: {
       nombre: '',
+      primerApellido: '',
+      segundoApellido: '',
+      lugarNacimiento: '',
     },
   });
 
   return <>
     <BarraHerramientas>
-      <Button textoAccesibilidad={t('palabras.cancelar')} onClick={() => { }}>
+      <Button onClick={() => { }}>
         {t('palabras.cancelar')}
       </Button>
       <Button
@@ -36,40 +42,102 @@ export default function FormularioPage() {
         ]}
         variant="principal"
         conOpciones
-        disabled={false}
       >
         {t('palabras.guardar')}
       </Button>
     </BarraHerramientas>
     <Main>
-      <Section
-        title={t('formulario.datosPersonales')}
-        id="datosGeneralesExpedientePsicosocial"
-      >
-        <FormGrid>
-          <FormField
-            id="nombreEvento"
-            labelText={t('formulario.nombre')}
-            layout="horizontal"
-            fullWidth
-            error={errors.nombre}
-          >
-            <Controller
-              name="nombre"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  id="nombreEvento"
-                  type="text"
-                  value={field.value ?? ''}
-                  onChange={field.onChange}
-                  error={!!errors.nombre}
-                />
-              )}
-            />
-          </FormField>
-        </FormGrid>
-      </Section>
+      <SectionGroup>
+        <Section
+          title={t('formulario.datosPersonales')}
+          id="datosPersonales"
+        >
+          <FormGrid>
+            <FormField
+              id="nombre"
+              labelText={t('formulario.nombre')}
+              error={errors.nombre}
+            >
+              <Controller
+                name="nombre"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    id="nombre"
+                    type="text"
+                    value={field.value ?? ''}
+                    onChange={field.onChange}
+                    error={!!errors.nombre}
+                  />
+                )}
+              />
+            </FormField>
+
+            <FormField
+              id="primerApellido"
+              labelText={t('formulario.primerApellido')}
+              error={errors.primerApellido}
+            >
+              <Controller
+                name="primerApellido"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    id="primerApellido"
+                    type="text"
+                    value={field.value ?? ''}
+                    onChange={field.onChange}
+                    error={!!errors.primerApellido}
+                  />
+                )}
+              />
+            </FormField>
+
+            <FormField
+              id="segundoApellido"
+              labelText={t('formulario.segundoApellido')}
+              error={errors.segundoApellido}
+            >
+              <Controller
+                name="segundoApellido"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    id="segundoApellido"
+                    type="text"
+                    value={field.value ?? ''}
+                    onChange={field.onChange}
+                    error={!!errors.segundoApellido}
+                  />
+                )}
+              />
+            </FormField>
+
+            <FormField
+              id="lugarNacimiento"
+              labelText={t('formulario.lugarNacimiento')}
+              error={errors.lugarNacimiento}
+            >
+              <Controller
+                name="lugarNacimiento"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    id="lugarNacimiento"
+                    type="text"
+                    value={field.value ?? ''}
+                    onChange={field.onChange}
+                    error={!!errors.lugarNacimiento}
+                  />
+                )}
+              />
+            </FormField>
+          </FormGrid>
+        </Section>
+      </SectionGroup>
+      <BarraLateral>
+        <IndiceLateral />
+      </BarraLateral>
     </Main>
   </>;
 }

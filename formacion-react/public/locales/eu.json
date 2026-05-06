@@ -1,11 +1,15 @@
 {
   "palabras": {
     "guardar": "Gorde",
-    "cancelar": "Utzi"
+    "cancelar": "Utzi",
+    "guardarYSalir": "Gorde eta irten"
   },
   "formulario": {
     "datosPersonales": "Datu pertsonalak",
     "nombre": "Izena",
-    "apellidos": "Abizenak"
+    "apellidos": "Abizenak",
+    "primerApellido": "Lehen abizena",
+    "segundoApellido": "Bigarren abizena",
+    "lugarNacimiento": "Jaioterria"
   }
 }

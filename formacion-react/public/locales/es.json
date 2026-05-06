@@ -1,11 +1,15 @@
 {
   "palabras": {
     "guardar": "Guardar",
-    "cancelar": "Cancelar"
+    "cancelar": "Cancelar",
+    "guardarYSalir": "Guardar y salir"
   },
   "formulario": {
     "datosPersonales": "Datos personales",
     "nombre": "Nombre",
-    "apellidos": "Apellidos"
+    "apellidos": "Apellidos",
+    "primerApellido": "Primer apellido",
+    "segundoApellido": "Segundo apellido",
+    "lugarNacimiento": "Lugar de nacimiento"
   }
 }

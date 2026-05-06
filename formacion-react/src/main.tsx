@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import { ThemeProvider } from '@tracasa/tracasa-components'
 import CustomErrorBoundary from './shared/base/error-boundary.tsx'
 import App from './App.tsx'
-import './index.css'
 import '@tracasa/tracasa-components/styles';
 import '@tracasa/tracasa-components/styles/navarra';
 import './shared/config/i18n';
