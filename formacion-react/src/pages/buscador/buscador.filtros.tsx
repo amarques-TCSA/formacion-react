@@ -14,10 +14,10 @@ export default function BuscadorFiltros({ maestros, registro, isLoading }: Busca
   const queryClient = useQueryClient();
 
   const onSubmit = () => {
-    //queryClient.removeQueries({ queryKey: ['buscador', 'resultados'] });
-    //queryClient.invalidateQueries({
-    //  queryKey: ['buscador', 'resultados'],
-   // });
+    queryClient.removeQueries({ queryKey: ['buscador', 'resultados'] });
+    queryClient.invalidateQueries({
+     queryKey: ['buscador', 'resultados'],
+   });
   };
 
   const { handleKeyPress } = useKeyPressFormulario<BuscadorForm>({
