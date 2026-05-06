@@ -1,0 +1,11 @@
+{
+  "palabras": {
+    "guardar": "Guardar",
+    "cancelar": "Cancelar"
+  },
+  "formulario": {
+    "datosPersonales": "Datos personales",
+    "nombre": "Nombre",
+    "apellidos": "Apellidos"
+  }
+}

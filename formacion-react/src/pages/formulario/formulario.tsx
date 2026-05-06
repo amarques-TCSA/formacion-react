@@ -1,3 +1,7 @@
+import FormularioPage from "./formulario.page";
+
 export default function Formulario() {
-	return <div>Formulario</div>;
+	return <>
+    <FormularioPage />
+  </>;
 }

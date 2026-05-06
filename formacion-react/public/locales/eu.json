@@ -1,0 +1,11 @@
+{
+  "palabras": {
+    "guardar": "Gorde",
+    "cancelar": "Utzi"
+  },
+  "formulario": {
+    "datosPersonales": "Datu pertsonalak",
+    "nombre": "Izena",
+    "apellidos": "Abizenak"
+  }
+}
