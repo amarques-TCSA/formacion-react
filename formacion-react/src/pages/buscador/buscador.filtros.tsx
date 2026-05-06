@@ -3,6 +3,7 @@ import { Controller, UseFormReturn } from "react-hook-form";
 import { BuscadorForm } from "./models/buscador.schema";
 import { useQueryClient } from "@tanstack/react-query";
 import { ObtenerMaestrosBuscador } from "./buscador.service";
+import useKeyPressFormulario from "@/shared/hooks/keypress-formulario.hook";
 
 type BuscadorFiltrosProps = {
   maestros: ReturnType<typeof ObtenerMaestrosBuscador>['data'];
@@ -110,7 +111,3 @@ export default function BuscadorFiltros({ maestros, registro, isLoading }: Busca
     </Form>
   );
 }
-function useKeyPressFormulario<T>(arg0: { registro: UseFormReturn<BuscadorForm>; onSubmit: () => void; }): { handleKeyPress: any; } {
-  throw new Error("Function not implemented.");
-}
-
