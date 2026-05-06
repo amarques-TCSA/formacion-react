@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { defineMock } from 'vite-plugin-mock-dev-server'
 
 export default defineMock(
@@ -6,37 +7,37 @@ export default defineMock(
             url: '/api/formulario/maestros',
             body: { 
                 nacionalidades: [
-                    { id: 1, nombre: 'Española' },
-                    { id: 2, nombre: 'Francesa' },
-                    { id: 3, nombre: 'Italiana' },
-                    { id: 4, nombre: 'Alemana' },
-                    { id: 5, nombre: 'Británica' },      
+                    { id: 1, descripcion: 'Española' },
+                    { id: 2, descripcion: 'Francesa' },
+                    { id: 3, descripcion: 'Italiana' },
+                    { id: 4, descripcion: 'Alemana' },
+                    { id: 5, descripcion: 'Británica' },      
                 ],
                 estadosCiviles: [
-                    { id: 1, nombre: 'Soltero/a' },
-                    { id: 2, nombre: 'Casado/a' },
-                    { id: 3, nombre: 'Divorciado/a' },
-                    { id: 4, nombre: 'Viudo/a' },
+                    { id: 1, descripcion: 'Soltero/a' },
+                    { id: 2, descripcion: 'Casado/a' },
+                    { id: 3, descripcion: 'Divorciado/a' },
+                    { id: 4, descripcion: 'Viudo/a' },
                 ],
                 ciudades: [
-                    { id: 1, nombre: 'Madrid' },
-                    { id: 2, nombre: 'Barcelona' },
-                    { id: 3, nombre: 'Valencia' },
-                    { id: 4, nombre: 'Sevilla' },
-                    { id: 5, nombre: 'Zaragoza' },
+                    { id: 1, descripcion: 'Madrid' },
+                    { id: 2, descripcion: 'Barcelona' },
+                    { id: 3, descripcion: 'Valencia' },
+                    { id: 4, descripcion: 'Sevilla' },
+                    { id: 5, descripcion: 'Zaragoza' },
                 ],
                 provincias: [
-                    { id: 1, nombre: 'Madrid' },
-                    { id: 2, nombre: 'Barcelona' },
-                    { id: 3, nombre: 'Valencia' },
-                    { id: 4, nombre: 'Sevilla' },
-                    { id: 5, nombre: 'Zaragoza' },
+                    { id: 1, descripcion: 'Madrid' },
+                    { id: 2, descripcion: 'Barcelona' },
+                    { id: 3, descripcion: 'Valencia' },
+                    { id: 4, descripcion: 'Sevilla' },
+                    { id: 5, descripcion: 'Zaragoza' },
                 ],
                 tiposResidencia: [
-                    { id: 1, nombre: 'Propia' },
-                    { id: 2, nombre: 'Alquilada' },
-                    { id: 3, nombre: 'Familiar' },
-                    { id: 4, nombre: 'Otra' },
+                    { id: 1, descripcion: 'Propia' },
+                    { id: 2, descripcion: 'Alquilada' },
+                    { id: 3, descripcion: 'Familiar' },
+                    { id: 4, descripcion: 'Otra' },
                 ]
             },
             method: 'GET',
@@ -60,16 +61,16 @@ export default defineMock(
             url: '/api/buscador/maestros',
             body: {
                 estadosCiviles: [
-                    { id: 1, nombre: 'Soltero/a' },
-                    { id: 2, nombre: 'Casado/a' },
-                    { id: 3, nombre: 'Divorciado/a' },
-                    { id: 4, nombre: 'Viudo/a' },
+                    { id: 1, descripcion: 'Soltero/a' },
+                    { id: 2, descripcion: 'Casado/a' },
+                    { id: 3, descripcion: 'Divorciado/a' },
+                    { id: 4, descripcion: 'Viudo/a' },
                 ],
                 estados: [
-                    { id: 1, nombre: 'Activo' },
-                    { id: 2, nombre: 'Pendiente' },
-                    { id: 3, nombre: 'Cancelado' },
-                    { id: 4, nombre: 'Archivado' },
+                    { id: 1, descripcion: 'Activo' },
+                    { id: 2, descripcion: 'Pendiente' },
+                    { id: 3, descripcion: 'Cancelado' },
+                    { id: 4, descripcion: 'Archivado' },
                 ]
             },
             method: 'GET',
@@ -78,9 +79,27 @@ export default defineMock(
         {
             url: '/api/buscador/buscar',
             body: ({body}) => {
-                console.log('Datos recibidos en el mock de búsqueda:', body);
+                let resultados = datosBuscadorMock;
+                console.log(resultados);
+                if (body?.filtros?.idEstado) {
+                    resultados = resultados.filter(resultado => resultado.idEstado == body.filtros.idEstado);
+                }
+                                console.log(resultados);
+
+                if (body?.filtros?.fechaDesde) {
+                    resultados = resultados.filter(resultado => dayjs(resultado.fechaRegistro, 'YYYY-MM-DD').isAfter(dayjs(body.filtros.fechaDesde, 'YYYY-MM-DD').subtract(1, 'day')));
+                }
+                                console.log(resultados);
+
+                if (body?.filtros?.fechaHasta) {
+                    resultados = resultados.filter(resultado => dayjs(resultado.fechaRegistro, 'YYYY-MM-DD').isBefore(dayjs(body.filtros.fechaHasta, 'YYYY-MM-DD').add(1, 'day')));
+                }
+                                console.log(resultados);
+
                 //añadir filtrado
-                return datosBuscadorMock;
+                return {
+                    resultados
+                }
             },
             method: 'POST',
             delay: 500

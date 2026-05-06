@@ -1,7 +1,8 @@
-import { object, string } from "yup";
+import { number, object, ObjectSchema, string } from "yup";
 
-export const schema = object({
+export const schema: ObjectSchema<BuscadorForm> = object({
     fechaDesde: string()
+    .notRequired()
     .typeError('La fecha desde no puede ser posterior a la fecha hasta')
     .test(
       'fechaHastaMayorQueFechaDesde',
@@ -14,7 +15,9 @@ export const schema = object({
         return true;
       },
     ),
-  fechaHasta: string().test(
+  fechaHasta: string()
+  .notRequired()
+  .test(
     'fechaHastaNoMenorQueFechaDesde',
     '',
     function (value) {
@@ -25,11 +28,11 @@ export const schema = object({
       return true;
     },
   ),
-  estado: string().required(),
+  idEstado: number().notRequired(),
 })
 
 export type BuscadorForm = {
-  fechaDesde?: string;
-  fechaHasta?: string;
-  estado: string;
+  fechaDesde?: string | null;
+  fechaHasta?: string | null;
+  idEstado?: number | null;
 }
