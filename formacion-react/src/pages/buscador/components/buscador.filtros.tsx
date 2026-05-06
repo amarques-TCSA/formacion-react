@@ -5,6 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import useKeyPressFormulario from "@/shared/hooks/keypress-formulario.hook";
 import { ObtenerMaestrosBuscador } from "../buscador.service";
 import { IApiRepository } from "@/shared/repositories/api";
+import { useFiltrosStore } from "../buscador.store";
 
 type BuscadorFiltrosProps = {
   apiRepository: IApiRepository;
@@ -14,8 +15,8 @@ type BuscadorFiltrosProps = {
 export default function BuscadorFiltros({ apiRepository, registro }: BuscadorFiltrosProps) {
   const { data: maestros } = ObtenerMaestrosBuscador({ apiRepository });
   const queryClient = useQueryClient();
-
   const onSubmit = () => {
+    setFiltros(registro.getValues());
     queryClient.removeQueries({ queryKey: ['buscador', 'resultados'] });
     queryClient.invalidateQueries({
       queryKey: ['buscador', 'resultados'],
@@ -27,6 +28,7 @@ export default function BuscadorFiltros({ apiRepository, registro }: BuscadorFil
     onSubmit,
   });
 
+  const { setFiltros } = useFiltrosStore();
 
   return (
     <Form
