@@ -3,13 +3,10 @@ import { ObtenerMaestrosBuscador, ObtenerResultadosBuscador } from "../buscador.
 import { Resultado } from "../models/resultado.model";
 import dayjs from "dayjs";
 import { IApiRepository } from "@/shared/repositories/api/api.repository";
-import { UseFormReturn } from "node_modules/react-hook-form/dist/types/form";
-import { BuscadorForm } from "../models/buscador.schema";
 import { useBuscadorStore } from "../buscador.store";
 
 type BuscadorDatosProps = {
   apiRepository: IApiRepository;
-  registro: UseFormReturn<BuscadorForm>;
 };
 
 const columnas: CabeceraListado<Resultado>[] = [
@@ -36,7 +33,7 @@ const columnas: CabeceraListado<Resultado>[] = [
   }
 ];
 
-export default function BuscadorDatos({ apiRepository, registro }: BuscadorDatosProps) {
+export default function BuscadorDatos({ apiRepository }: BuscadorDatosProps) {
   const { data: maestros } = ObtenerMaestrosBuscador({ apiRepository });
   const { filtros, setModalAbierta, setDatosModal } = useBuscadorStore();
 
