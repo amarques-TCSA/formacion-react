@@ -11,60 +11,18 @@ import { useQuery } from '@tanstack/react-query';
 import { t } from 'i18next';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import * as yup from 'yup';
 
+import { DomicilioForm } from './sections/domicilios/domicilios.model';
+import { domiciliosSchema } from './sections/domicilios/domicilios.schema';
+import {
+  obtenerCiudades,
+  obtenerProvincias,
+  obtenerTiposResidencia,
+} from './modal-domicilio.inputs';
 import { useModalDomicilioStore } from './modal-domicilio.store';
-
-export type DomicilioForm = {
-  calle: string;
-  numero: string;
-  codigoPostal: string;
-  ciudad: string;
-  provincia: string;
-  tipoResidencia: string;
-};
 
 type ModalDomicilioProps = {
   onGuardar: (datos: DomicilioForm, idEdicion?: number) => void;
-};
-
-type OpcionSelector = {
-  id: string;
-  texto: string;
-};
-
-const schemaDomicilio = yup.object({
-  calle: yup.string().required(),
-  numero: yup.string().required(),
-  codigoPostal: yup
-    .string()
-    .required()
-    .matches(/^\d{5}$/, 'El codigo postal debe tener 5 numeros'),
-  ciudad: yup.string().required(),
-  provincia: yup.string().required(),
-  tipoResidencia: yup.string().required(),
-});
-
-const ciudadesMock: OpcionSelector[] = [
-  { id: 'sarriguren', texto: 'Sarriguren' },
-  { id: 'pamplona', texto: 'Pamplona' },
-  { id: 'tudela', texto: 'Tudela' },
-  { id: 'estella', texto: 'Estella' },
-];
-
-const provinciasMock: OpcionSelector[] = [
-  { id: 'navarra', texto: 'Navarra' },
-  { id: 'guipuzcoa', texto: 'Gipuzkoa' },
-  { id: 'bizkaia', texto: 'Bizkaia' },
-  { id: 'araba', texto: 'Araba' },
-];
-
-const obtenerCiudades = async (): Promise<OpcionSelector[]> => {
-  return Promise.resolve(ciudadesMock);
-};
-
-const obtenerProvincias = async (): Promise<OpcionSelector[]> => {
-  return Promise.resolve(provinciasMock);
 };
 
 export default function ModalDomicilio({ onGuardar }: ModalDomicilioProps) {
@@ -136,10 +94,11 @@ export default function ModalDomicilio({ onGuardar }: ModalDomicilioProps) {
     clearErrors();
 
     try {
-      schemaDomicilio.validateSync(datos, { abortEarly: false });
+      domiciliosSchema.validateSync(datos, { abortEarly: false });
     } catch (error) {
-      if (error instanceof yup.ValidationError) {
-        error.inner.forEach((itemError) => {
+      if (error instanceof Error && 'inner' in error) {
+        const validationError = error as { inner: Array<{ path?: string; message: string }> };
+        validationError.inner.forEach((itemError) => {
           if (itemError.path) {
             setError(itemError.path as keyof DomicilioForm, {
               type: 'manual',
@@ -256,11 +215,7 @@ export default function ModalDomicilio({ onGuardar }: ModalDomicilioProps) {
                   id="tipoResidencia"
                   permitirBusqueda
                   mostrarX
-                  opciones={[
-                    { id: 'propia', texto: t('formulario.modal.opcionPropia') },
-                    { id: 'alquiler', texto: t('formulario.modal.opcionAlquiler') },
-                    { id: 'cedida', texto: t('formulario.modal.opcionCedida') },
-                  ]}
+                  opciones={obtenerTiposResidencia()}
                   idSeleccionado={field.value ?? null}
                   onChange={field.onChange}
                   error={!!errors.tipoResidencia}

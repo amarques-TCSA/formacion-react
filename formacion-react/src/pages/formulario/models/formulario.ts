@@ -1,0 +1,15 @@
+export const defaultFormularioValues = {
+  nombre: undefined,
+  primerApellido: undefined,
+  segundoApellido: undefined,
+  lugarNacimiento: undefined,
+  estadoCivil: undefined,
+  nacionalidad: undefined,
+  fechaRegistro: undefined,
+  fechaNacimiento: undefined,
+  tipoDocumento: undefined,
+  numeroDocumento: undefined,
+  fechaExpedicionDocumento: undefined,
+  fechaCaducidadDocumento: undefined,
+  autoridadEmisoraDocumento: undefined
+}

@@ -41,5 +41,57 @@
       "cancelar": "Cancelar",
       "guardar": "Guardar"
     }
+  },
+  "shared": {
+    "validations": {
+      "array": {
+        "max": "{{label}} debe tener como máximo {{max}} elementos",
+        "min": "{{label}} debe tener al menos {{min}} elementos"
+      },
+      "custom": {
+        "fileMaxSize": "{{label}} debe tener como tamaño máximo {{maxKb}} KB"
+      },
+      "date": {
+        "max": "{{label}} debe estar anterior a {{max}}",
+        "min": "{{label}} debe ser posterior a {{min}}"
+      },
+      "mixed": {
+        "default": "{{label}} es inválido",
+        "formatoCorreoIncorrecto": "Formato de correo incorrecto",
+        "mensajeCampoObligatorio": "Campo obligatorio",
+        "mensajeCamposObligatorios": "Faltan campos obligatorios.",
+        "mensajeDocumentacionObligatoria": "Debe añadirse documentación a la solicitud",
+        "mensajeDosIntervinientesNecesarios": "Debe añadirse un segundo interviniente a la solicitud",
+        "notOneOf": "{{label}} no debe ser uno de los siguientes valores: {{values}}",
+        "notType": "{{label}} tiene un tipo incorrecto",
+        "oneOf": "{{label}} debe ser: {{values}}",
+        "required": "{{label}} es requerido"
+      },
+      "number": {
+        "integer": "{{label}} debe ser un entero",
+        "lessThan": "{{label}} debe ser menor que {{less}}",
+        "max": "{{label}} debe ser menor o igual que {{max}}",
+        "min": "{{label}} debe ser mayor o igual que {{min}}",
+        "moreThan": "{{label}} debe ser mayor que {{more}}",
+        "negative": "{{label}} debe ser un número negativo",
+        "positive": "{{label}} debe ser un número positivo"
+      },
+      "regex": {
+        "invalid": "Formato incorrecto. Ej: {{example}}"
+      },
+      "string": {
+        "caracteresInvalidos": "{{label}} contiene caracteres no permitidos ^\\/:\"*<>|",
+        "email": "{{label}} debe ser un email válido",
+        "format": "{{label}} tiene un formato inválido",
+        "length": "{{label}} debe tener exactamente {{length}} carácteres",
+        "lowercase": "{{label}} debe ser una cadena en minúsculas",
+        "matches": "{{label}} debe coincidir con: \"{{regex}}\"",
+        "max": "{{label}} debe tener máximo {{max}} carácteres",
+        "min": "{{label}} debe tener al menos {{min}} carácteres",
+        "trim": "{{label}} debe ser una cadena sin espacios al inicio/fin",
+        "uppercase": "{{label}} debe ser una cadena en minúscula",
+        "url": "{{label}} debe ser una URL válida"
+      }
+    }
   }
 }

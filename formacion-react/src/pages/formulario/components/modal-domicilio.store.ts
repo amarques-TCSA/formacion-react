@@ -1,14 +1,5 @@
 import { create } from 'zustand';
-
-export type DomicilioEdicion = {
-  id: number;
-  calle: string;
-  numero: string;
-  codigoPostal: string;
-  ciudad: string;
-  provincia: string;
-  tipoResidencia: string;
-};
+import { DomicilioEdicion } from './sections/domicilios/domicilios.model';
 
 type ModalDomicilioStore = {
   isOpen: boolean;
