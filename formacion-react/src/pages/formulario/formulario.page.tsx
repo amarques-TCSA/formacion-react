@@ -13,16 +13,19 @@ import {
 } from '@tracasa/tracasa-components';
 
 import { useFormHook } from '@/shared/hooks/use-form-hook';
+import { FormularioHttpRepository } from '@/shared/repositories/formulario';
 
 import DatosPersonalesSection from './components/secciones/datos-personales/datos-personales.section';
 import DocumentoIdentidadSection from './components/secciones/documento-identidad/documento-identidad.section';
 import DomicilioSection from './components/secciones/domicilios/domicilios.section';
 import { FormularioSeccionesForm } from './models/formulario.model';
 import { formularioSeccionesSchema } from './models/formulario.schema';
-
 import { defaultFormularioValues } from './models/formulario';
+import { EnviarFormulario } from './queries/formulario.queries';
 
 export default function FormularioPage() {
+  const formularioRepository = FormularioHttpRepository();
+
   const registro = useForm<FormularioSeccionesForm>({
     mode: 'onSubmit',
     resolver: yupResolver(formularioSeccionesSchema),
@@ -31,10 +34,12 @@ export default function FormularioPage() {
     },
   });
 
+  const { mutate: guardar } = EnviarFormulario({ formularioRepository });
+
   const { control, reset, formState: { errors } } = registro;
 
   const onSubmit = (data: FormularioSeccionesForm) => {
-    console.log('Guardando formulario...', data);
+    guardar(data);
   };
 
   const { handleKeyPress } = useFormHook({
@@ -63,9 +68,9 @@ export default function FormularioPage() {
 
       <Main>
         <SectionGroup>
-          <DatosPersonalesSection control={control} errors={errors} />
+          <DatosPersonalesSection control={control} errors={errors} formularioRepository={formularioRepository} />
           <DocumentoIdentidadSection control={control} errors={errors} />
-          <DomicilioSection />
+          <DomicilioSection formularioRepository={formularioRepository} />
         </SectionGroup>
 
         <BarraLateral>

@@ -10,17 +10,24 @@ import {
 import { t } from 'i18next';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
 
+import { IFormularioRepository } from '@/shared/repositories/formulario';
+import { ObtenerFormularioMaestros } from '../../../queries/formulario.queries';
 import { FormularioSeccionesForm } from '../../../models/formulario.model';
 
 type DatosPersonalesSectionProps = {
   control: Control<FormularioSeccionesForm>;
   errors: FieldErrors<FormularioSeccionesForm>;
+  formularioRepository: IFormularioRepository;
 };
 
 export default function DatosPersonalesSection({
   control,
   errors,
+  formularioRepository,
 }: DatosPersonalesSectionProps) {
+
+  const { nacionalidades, estadosCiviles } = ObtenerFormularioMaestros({ formularioRepository });
+
   return (
     <Section title={t('formulario.datosPersonales')} id="datosPersonales">
       <FormGrid>
@@ -147,7 +154,7 @@ export default function DatosPersonalesSection({
                 permitirBusqueda
                 mostrarX={true}
                 id="nacionalidad"
-                opciones={[]}
+                opciones={nacionalidades}
                 idSeleccionado={field.value?.toString() ?? null}
                 onChange={field.onChange}
                 error={!!errors.nacionalidad}
@@ -165,7 +172,7 @@ export default function DatosPersonalesSection({
                 permitirBusqueda
                 mostrarX={true}
                 id="estadoCivil"
-                opciones={[]}
+                opciones={estadosCiviles}
                 idSeleccionado={field.value?.toString() ?? null}
                 onChange={field.onChange}
                 error={!!errors.estadoCivil}

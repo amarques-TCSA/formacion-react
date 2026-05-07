@@ -33,7 +33,3 @@ export type DomicilioListado = {
   actual: string;
 };
 
-export type OpcionSelector = {
-  id: string;
-  texto: string;
-};

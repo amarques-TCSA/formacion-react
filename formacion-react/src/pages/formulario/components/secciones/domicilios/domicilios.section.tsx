@@ -15,6 +15,7 @@ import { useState } from 'react';
 
 import ModalDomicilio from '../../modal/modal-domicilio';
 import { useModalDomicilioStore } from '../../modal/modal-domicilio.store';
+import { IFormularioRepository } from '@/shared/repositories/formulario';
 import {
   defaultFormularioValues,
   DomicilioForm,
@@ -87,7 +88,7 @@ const columnasDomicilios = createColumnDefs(
   ],
 );
 
-export default function DomicilioSection() {
+export default function DomicilioSection({ formularioRepository }: { formularioRepository: IFormularioRepository }) {
   const abrirModal = useModalDomicilioStore((state) => state.abrirModal);
   const [domicilios, setDomicilios] = useState(domiciliosIniciales);
   const domicilio = useModalDomicilioStore((state) => state.domicilio);
@@ -179,7 +180,7 @@ export default function DomicilioSection() {
       </Section>
 
       {
-        domicilio && <ModalDomicilio onGuardar={handleGuardarDomicilio} />
+        domicilio && <ModalDomicilio onGuardar={handleGuardarDomicilio} formularioRepository={formularioRepository} />
       }
     </>
   );

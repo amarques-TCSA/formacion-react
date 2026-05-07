@@ -7,38 +7,27 @@ import {
   Selector,
   TextButton,
 } from '@tracasa/tracasa-components';
-import { useQuery } from '@tanstack/react-query';
 import { t } from 'i18next';
 import { Controller, useForm } from 'react-hook-form';
 
 import { DomicilioForm } from '../secciones/domicilios/domicilios.model';
 import { domiciliosSchema } from '../secciones/domicilios/domicilios.schema';
-import {
-  obtenerCiudades,
-  obtenerProvincias,
-  obtenerTiposResidencia,
-} from './modal-domicilio.inputs';
+import { IFormularioRepository } from '@/shared/repositories/formulario';
+import { ObtenerFormularioMaestros } from '../../queries/formulario.queries';
 import { useModalDomicilioStore } from './modal-domicilio.store';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 type ModalDomicilioProps = {
   onGuardar: (datos: DomicilioForm, idEdicion?: number) => void;
+  formularioRepository: IFormularioRepository;
 };
 
-export default function ModalDomicilio({ onGuardar }: ModalDomicilioProps) {
+export default function ModalDomicilio({ onGuardar, formularioRepository }: ModalDomicilioProps) {
   const cerrarModal = useModalDomicilioStore(x => x.cerrarModal);
   const domicilio = useModalDomicilioStore(x => x.domicilio);
   const isOpen = useModalDomicilioStore(x => x.isOpen);
 
-  const { data: ciudades = [] } = useQuery({
-    queryKey: ['formulario', 'modal-domicilio', 'ciudades'],
-    queryFn: obtenerCiudades,
-  });
-
-  const { data: provincias = [] } = useQuery({
-    queryKey: ['formulario', 'modal-domicilio', 'provincias'],
-    queryFn: obtenerProvincias,
-  });
+  const { ciudades, provincias, tiposResidencia } = ObtenerFormularioMaestros({ formularioRepository });
 
   const {
     control,
@@ -160,7 +149,7 @@ export default function ModalDomicilio({ onGuardar }: ModalDomicilioProps) {
                   id="tipoResidencia"
                   permitirBusqueda
                   mostrarX
-                  opciones={obtenerTiposResidencia()}
+                  opciones={tiposResidencia}
                   idSeleccionado={field.value ?? null}
                   onChange={field.onChange}
                   error={!!errors.tipoResidencia}
