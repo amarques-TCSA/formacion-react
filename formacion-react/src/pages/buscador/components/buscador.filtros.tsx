@@ -99,32 +99,6 @@ export default function BuscadorFiltros({ apiRepository, registro }: BuscadorFil
             )}
           />
         </FormField>
-        <FormField
-          id="idEstadoCivil"
-          labelText="Estado civil"
-          layout="vertical"
-          required
-          fullWidth
-        >
-          <Controller
-            control={registro.control}
-            name="idEstadoCivil"
-            render={({ field }) => (
-              <Selector
-                permitirBusqueda
-                mostrarX={true}
-                id="idEstadoCivil"
-                opciones={maestros.estadosCiviles.map((x) => ({
-                  id: x.id.toString(),
-                  texto: x.descripcion,
-                }))}
-                idSeleccionado={field.value?.toString() ?? null}
-                onChange={field.onChange}
-                error={!!registro.formState.errors.idEstadoCivil}
-              />
-            )}
-          />
-        </FormField>
       </LayoutBuscadorFilterSection>
 
       <RowLayout

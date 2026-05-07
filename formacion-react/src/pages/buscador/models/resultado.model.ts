@@ -5,5 +5,4 @@ export type Resultado = {
     fechaRegistro: dayjs.Dayjs;
     nombreCompleto: string;
     estadoSolicitud: string;
-    estadoCivil: string;
 }

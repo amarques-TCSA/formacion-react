@@ -45,16 +45,6 @@ export default function BuscadorDetalleModal() {
               value={datosModal?.estadoSolicitud}
             />
           </FormField>
-          <FormField
-            id="estadoCivil"
-            labelText="Estado civil"
-          >
-            <Input
-              title="Estado civil"
-              readOnly
-              value={datosModal?.estadoCivil}
-            />
-          </FormField>
         </StackLayout>
       </Modal.Body>
       <Modal.Footer>

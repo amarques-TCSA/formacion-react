@@ -6,7 +6,6 @@ export const filtrosPorDefecto: BuscadorForm = {
   fechaDesde: null,
   fechaHasta: null,
   idEstadoSolicitud: null,
-  idEstadoCivil: null,
 };
 
 type BuscadorStore = {
