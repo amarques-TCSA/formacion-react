@@ -14,6 +14,17 @@
     "nacionalidad": "Nacionalitatea",
     "estadoCivil": "Egoera zibila",
     "fechaRegistro": "Erregistro data",
-    "fechaNacimiento": "Jaiotze data"
+    "fechaNacimiento": "Jaiotze data",
+    "documentoIdentidad": "Nortasun agiria",
+    "tipoDocumento": "Agiri mota",
+    "numeroDocumento": "Agiri zenbakia",
+    "fechaExpedicionDocumento": "Jaulkipen data",
+    "fechaCaducidadDocumento": "Iraungitze data",
+    "autoridadEmisoraDocumento": "Herrialdea / Agintaritza jaulkitzailea",
+    "opcionDocumentoDni": "NAN",
+    "opcionDocumentoPasaporte": "Pasaportea",
+    "opcionDocumentoNie": "AIZ",
+    "domicilio": "Helbidea",
+    "mensajeDomicilio": "Kontuan izan helbide bat gehitzean..."
   }
 }

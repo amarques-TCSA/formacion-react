@@ -1,4 +1,4 @@
-import { BarraHerramientas, BarraLateral, Button, FormField, FormGrid, IndiceLateral, Input, InputDate, InputDateTime, Main, Section, SectionGroup, Selector } from "@tracasa/tracasa-components";
+import { BarraHerramientas, BarraLateral, Button, FormField, FormGrid, IndiceLateral, Input, InputDate, InputDateTime, Main, Mensaje, Section, SectionGroup, Selector } from "@tracasa/tracasa-components";
 import { t } from "i18next";
 import { Controller, useForm } from "react-hook-form";
 
@@ -228,13 +228,13 @@ export default function FormularioPage() {
         </Section>
 
         <Section
-          title="Documento de identidad"
+          title={t('formulario.documentoIdentidad')}
           id="documentoIdentidad"
         >
           <FormGrid>
             <FormField
               id="tipoDocumento"
-              labelText="Tipo de documento"
+              labelText={t('formulario.tipoDocumento')}
               error={errors.tipoDocumento}
             >
               <Controller
@@ -246,9 +246,9 @@ export default function FormularioPage() {
                     mostrarX={true}
                     id="tipoDocumento"
                     opciones={[
-                      { id: 'dni', texto: 'DNI' },
-                      { id: 'pasaporte', texto: 'Pasaporte' },
-                      { id: 'nie', texto: 'NIE' },
+                      { id: 'dni', texto: t('formulario.opcionDocumentoDni') },
+                      { id: 'pasaporte', texto: t('formulario.opcionDocumentoPasaporte') },
+                      { id: 'nie', texto: t('formulario.opcionDocumentoNie') },
                     ]}
                     idSeleccionado={field.value?.toString() ?? null}
                     onChange={field.onChange}
@@ -260,7 +260,7 @@ export default function FormularioPage() {
 
             <FormField
               id="numeroDocumento"
-              labelText="Numero de documento"
+              labelText={t('formulario.numeroDocumento')}
               error={errors.numeroDocumento}
             >
               <Controller
@@ -279,7 +279,7 @@ export default function FormularioPage() {
             </FormField>
 
             <FormField
-              labelText="Fecha expedicion"
+              labelText={t('formulario.fechaExpedicionDocumento')}
               error={errors?.fechaExpedicionDocumento}
               id="fechaExpedicionDocumento"
             >
@@ -298,7 +298,7 @@ export default function FormularioPage() {
             </FormField>
 
             <FormField
-              labelText="Fecha caducidad"
+              labelText={t('formulario.fechaCaducidadDocumento')}
               error={errors?.fechaCaducidadDocumento}
               id="fechaCaducidadDocumento"
             >
@@ -318,7 +318,7 @@ export default function FormularioPage() {
 
             <FormField
               id="autoridadEmisoraDocumento"
-              labelText="Pais / Autoridad emisora"
+              labelText={t('formulario.autoridadEmisoraDocumento')}
               error={errors.autoridadEmisoraDocumento}
               fullWidth
             >
@@ -337,6 +337,17 @@ export default function FormularioPage() {
               />
             </FormField>
           </FormGrid>
+        </Section>
+
+        <Section
+          title={t('formulario.domicilio')}
+          id="domicilio"
+        >
+          <Mensaje
+            message={t('formulario.mensajeDomicilio')}
+            variant="info"
+          />
+
         </Section>
       </SectionGroup>
       <BarraLateral>

@@ -14,6 +14,17 @@
     "nacionalidad": "Nacionalidad",
     "estadoCivil": "Estado civil",
     "fechaRegistro": "Fecha de registro",
-    "fechaNacimiento": "Fecha de nacimiento"
+    "fechaNacimiento": "Fecha de nacimiento",
+    "documentoIdentidad": "Documento de identidad",
+    "tipoDocumento": "Tipo de documento",
+    "numeroDocumento": "Numero de documento",
+    "fechaExpedicionDocumento": "Fecha expedicion",
+    "fechaCaducidadDocumento": "Fecha caducidad",
+    "autoridadEmisoraDocumento": "Pais / Autoridad emisora",
+    "opcionDocumentoDni": "DNI",
+    "opcionDocumentoPasaporte": "Pasaporte",
+    "opcionDocumentoNie": "NIE",
+    "domicilio": "Domicilio",
+    "mensajeDomicilio": "Tenga en cuenta que al anadir un domicilio..."
   }
 }
