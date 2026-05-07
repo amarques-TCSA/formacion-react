@@ -12,8 +12,8 @@ import {
 import { t } from 'i18next';
 import { useState } from 'react';
 
-import ModalDomicilio from '../../modal-domicilio';
-import { useModalDomicilioStore } from '../../modal-domicilio.store';
+import ModalDomicilio from '../../modal/modal-domicilio';
+import { useModalDomicilioStore } from '../../modal/modal-domicilio.store';
 import {
   DomicilioForm,
   DomicilioItem,

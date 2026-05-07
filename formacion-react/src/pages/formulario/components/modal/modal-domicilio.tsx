@@ -12,8 +12,8 @@ import { t } from 'i18next';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { DomicilioForm } from './sections/domicilios/domicilios.model';
-import { domiciliosSchema } from './sections/domicilios/domicilios.schema';
+import { DomicilioForm } from '../secciones/domicilios/domicilios.model';
+import { domiciliosSchema } from '../secciones/domicilios/domicilios.schema';
 import {
   obtenerCiudades,
   obtenerProvincias,

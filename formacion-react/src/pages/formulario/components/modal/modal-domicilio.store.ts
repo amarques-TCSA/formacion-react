@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { DomicilioEdicion } from './sections/domicilios/domicilios.model';
+import { DomicilioEdicion } from '../secciones/domicilios/domicilios.model';
 
 type ModalDomicilioStore = {
   isOpen: boolean;

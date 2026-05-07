@@ -9,7 +9,7 @@ import {
 import { t } from 'i18next';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
 
-import { FormularioSeccionesForm } from '../formulario-secciones.model';
+import { FormularioSeccionesForm } from '../../../models/formulario.model';
 
 type DocumentoIdentidadSectionProps = {
   control: Control<FormularioSeccionesForm>;

@@ -1,6 +1,6 @@
 import { t } from 'i18next';
 
-import { OpcionSelector } from './sections/domicilios/domicilios.model';
+import { OpcionSelector } from '../secciones/domicilios/domicilios.model';
 
 const ciudadesMock: OpcionSelector[] = [
   { id: 'sarriguren', texto: 'Sarriguren' },

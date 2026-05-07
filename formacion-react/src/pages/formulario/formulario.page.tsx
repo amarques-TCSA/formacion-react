@@ -14,11 +14,11 @@ import {
 
 import { useFormHook } from '@/shared/hooks/use-form-hook';
 
-import DatosPersonalesSection from './components/sections/datos-personales/datos-personales.section';
-import DocumentoIdentidadSection from './components/sections/documento-identidad/documento-identidad.section';
-import DomicilioSection from './components/sections/domicilios/domicilios.section';
-import { FormularioSeccionesForm } from './components/sections/formulario-secciones.model';
-import { formularioSeccionesSchema } from './components/sections/formulario-secciones.schema';
+import DatosPersonalesSection from './components/secciones/datos-personales/datos-personales.section';
+import DocumentoIdentidadSection from './components/secciones/documento-identidad/documento-identidad.section';
+import DomicilioSection from './components/secciones/domicilios/domicilios.section';
+import { FormularioSeccionesForm } from './models/formulario.model';
+import { formularioSeccionesSchema } from './models/formulario.schema';
 
 import { defaultFormularioValues } from './models/formulario';
 
@@ -71,7 +71,6 @@ export default function FormularioPage() {
         <BarraLateral>
           <IndiceLateral />
         </BarraLateral>
-
       </Main>
     </Form>
   );
