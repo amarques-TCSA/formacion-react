@@ -25,6 +25,21 @@
     "opcionDocumentoPasaporte": "Pasaportea",
     "opcionDocumentoNie": "AIZ",
     "domicilio": "Helbidea",
-    "mensajeDomicilio": "Kontuan izan helbide bat gehitzean..."
+    "mensajeDomicilio": "Kontuan izan helbide bat gehitzean...",
+    "modal": {
+      "titulo": "Helbidea",
+      "subtitulo": "Helbidea gehitu",
+      "calle": "Kalea / bidea",
+      "numero": "Zenbakia",
+      "codigoPostal": "Posta kodea",
+      "ciudad": "Hiria",
+      "provincia": "Probintzia",
+      "tipoResidencia": "Egoitza mota",
+      "opcionPropia": "Jabetzakoa",
+      "opcionAlquiler": "Alokairua",
+      "opcionCedida": "Lagatakoa",
+      "cancelar": "Utzi",
+      "guardar": "Gorde"
+    }
   }
 }

@@ -25,6 +25,21 @@
     "opcionDocumentoPasaporte": "Pasaporte",
     "opcionDocumentoNie": "NIE",
     "domicilio": "Domicilio",
-    "mensajeDomicilio": "Tenga en cuenta que al anadir un domicilio..."
+    "mensajeDomicilio": "Tenga en cuenta que al anadir un domicilio...",
+    "modal": {
+      "titulo": "Domicilio",
+      "subtitulo": "Anadir domicilio",
+      "calle": "Calle / via",
+      "numero": "Numero",
+      "codigoPostal": "Codigo postal",
+      "ciudad": "Ciudad",
+      "provincia": "Provincia",
+      "tipoResidencia": "Tipo de residencia",
+      "opcionPropia": "Propia",
+      "opcionAlquiler": "Alquiler",
+      "opcionCedida": "Cedida",
+      "cancelar": "Cancelar",
+      "guardar": "Guardar"
+    }
   }
 }
