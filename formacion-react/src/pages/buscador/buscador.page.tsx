@@ -44,7 +44,7 @@ export default function BuscadorPage({
       <LayoutBuscador
         title="Página de buscador"
         filtros={<BuscadorFiltros apiRepository={apiRepository} registro={registro} />}
-        contenido={<Suspense><BuscadorContenido registro={registro} apiRepository={apiRepository} /></Suspense>}
+        contenido={<Suspense><BuscadorContenido apiRepository={apiRepository} /></Suspense>}
         childrenBarraHerramientas={botonImprimir}
       />
       <BuscadorDetalleModal />
