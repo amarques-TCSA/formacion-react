@@ -7,7 +7,16 @@ export type DomicilioForm = {
   tipoResidencia: string;
 };
 
-export type DomicilioEdicion = DomicilioForm & {
+export const defaultFormularioValues = {
+  calle: '',
+  numero: '',
+  codigoPostal: '',
+  ciudad: '',
+  provincia: '',
+  tipoResidencia: '',
+};
+
+export type Domicilio = DomicilioForm & {
   id: number;
 };
 

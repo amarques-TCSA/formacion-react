@@ -9,7 +9,6 @@ import {
 } from '@tracasa/tracasa-components';
 import { useQuery } from '@tanstack/react-query';
 import { t } from 'i18next';
-import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { DomicilioForm } from '../secciones/domicilios/domicilios.model';
@@ -20,6 +19,7 @@ import {
   obtenerTiposResidencia,
 } from './modal-domicilio.inputs';
 import { useModalDomicilioStore } from './modal-domicilio.store';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 type ModalDomicilioProps = {
   onGuardar: (datos: DomicilioForm, idEdicion?: number) => void;
@@ -27,7 +27,7 @@ type ModalDomicilioProps = {
 
 export default function ModalDomicilio({ onGuardar }: ModalDomicilioProps) {
   const cerrarModal = useModalDomicilioStore(x => x.cerrarModal);
-  const domicilioEnEdicion = useModalDomicilioStore(x => x.domicilioEnEdicion);
+  const domicilio = useModalDomicilioStore(x => x.domicilio);
   const isOpen = useModalDomicilioStore(x => x.isOpen);
 
   const { data: ciudades = [] } = useQuery({
@@ -44,46 +44,11 @@ export default function ModalDomicilio({ onGuardar }: ModalDomicilioProps) {
     control,
     handleSubmit,
     reset,
-    clearErrors,
-    setError,
     formState: { errors },
   } = useForm<DomicilioForm>({
-    defaultValues: {
-      calle: '',
-      numero: '',
-      codigoPostal: '',
-      ciudad: '',
-      provincia: '',
-      tipoResidencia: '',
-    },
+    defaultValues: { ...domicilio },
+    resolver: yupResolver(domiciliosSchema)
   });
-
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-
-    if (domicilioEnEdicion) {
-      reset({
-        calle: domicilioEnEdicion.calle,
-        numero: domicilioEnEdicion.numero,
-        codigoPostal: domicilioEnEdicion.codigoPostal,
-        ciudad: domicilioEnEdicion.ciudad,
-        provincia: domicilioEnEdicion.provincia,
-        tipoResidencia: domicilioEnEdicion.tipoResidencia,
-      });
-      return;
-    }
-
-    reset({
-      calle: '',
-      numero: '',
-      codigoPostal: '',
-      ciudad: '',
-      provincia: '',
-      tipoResidencia: '',
-    });
-  }, [isOpen, domicilioEnEdicion, reset]);
 
   const handleCancelar = () => {
     reset();
@@ -91,27 +56,7 @@ export default function ModalDomicilio({ onGuardar }: ModalDomicilioProps) {
   };
 
   const handleGuardar = (datos: DomicilioForm) => {
-    clearErrors();
-
-    try {
-      domiciliosSchema.validateSync(datos, { abortEarly: false });
-    } catch (error) {
-      if (error instanceof Error && 'inner' in error) {
-        const validationError = error as { inner: Array<{ path?: string; message: string }> };
-        validationError.inner.forEach((itemError) => {
-          if (itemError.path) {
-            setError(itemError.path as keyof DomicilioForm, {
-              type: 'manual',
-              message: itemError.message,
-            });
-          }
-        });
-        return;
-      }
-      return;
-    }
-
-    onGuardar(datos, domicilioEnEdicion?.id);
+    onGuardar(datos, domicilio?.id);
     reset();
     cerrarModal();
   };

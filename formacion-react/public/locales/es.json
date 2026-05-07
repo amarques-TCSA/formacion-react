@@ -2,7 +2,10 @@
   "palabras": {
     "guardar": "Guardar",
     "cancelar": "Cancelar",
-    "guardarYSalir": "Guardar y salir"
+    "guardarYSalir": "Guardar y salir",
+    "editar": "Editar",
+    "eliminar": "Eliminar",
+    "anadir": "Añadir"
   },
   "formulario": {
     "datosPersonales": "Datos personales",

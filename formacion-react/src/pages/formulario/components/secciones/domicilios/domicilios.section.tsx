@@ -6,6 +6,7 @@ import {
   ListadoPaginado,
   Mensaje,
   normalizeString,
+  RowLayout,
   Section,
   TiposOrden,
 } from '@tracasa/tracasa-components';
@@ -15,6 +16,7 @@ import { useState } from 'react';
 import ModalDomicilio from '../../modal/modal-domicilio';
 import { useModalDomicilioStore } from '../../modal/modal-domicilio.store';
 import {
+  defaultFormularioValues,
   DomicilioForm,
   DomicilioItem,
   DomicilioListado,
@@ -88,6 +90,7 @@ const columnasDomicilios = createColumnDefs(
 export default function DomicilioSection() {
   const abrirModal = useModalDomicilioStore((state) => state.abrirModal);
   const [domicilios, setDomicilios] = useState(domiciliosIniciales);
+  const domicilio = useModalDomicilioStore((state) => state.domicilio);
 
   const handleEliminarDomicilio = (id: number) => {
     setDomicilios((prev) => prev.filter((domicilio) => domicilio.id !== id));
@@ -99,13 +102,7 @@ export default function DomicilioSection() {
       return;
     }
     abrirModal({
-      id: domicilio.id,
-      calle: domicilio.calle,
-      numero: domicilio.numero,
-      codigoPostal: domicilio.codigoPostal,
-      ciudad: domicilio.ciudad,
-      provincia: domicilio.provincia,
-      tipoResidencia: domicilio.tipoResidencia,
+      ...domicilio
     });
   };
 
@@ -115,9 +112,9 @@ export default function DomicilioSection() {
         prev.map((domicilio) =>
           domicilio.id === idEdicion
             ? {
-                ...domicilio,
-                ...datos,
-              }
+              ...domicilio,
+              ...datos,
+            }
             : domicilio,
         ),
       );
@@ -149,11 +146,11 @@ export default function DomicilioSection() {
     actual: domicilio.actual,
     acciones: [
       {
-        textoDescriptivo: 'Editar',
+        textoDescriptivo: t('palabras.editar'),
         accion: () => handleEditarDomicilio(domicilio.id),
       },
       {
-        textoDescriptivo: 'Eliminar',
+        textoDescriptivo: t('palabras.eliminar'),
         accion: () => handleEliminarDomicilio(domicilio.id),
       },
     ],
@@ -174,14 +171,16 @@ export default function DomicilioSection() {
           mostrarPaginacion={false}
         />
 
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.75rem' }}>
-          <Button variant="principal" onClick={() => abrirModal()}>
-            Añadir
+        <RowLayout justifyContent='end'>
+          <Button variant="principal" onClick={() => abrirModal({ ...defaultFormularioValues, id: 0 })}>
+            {t('palabras.anadir')}
           </Button>
-        </div>
+        </RowLayout>
       </Section>
 
-      <ModalDomicilio onGuardar={handleGuardarDomicilio} />
+      {
+        domicilio && <ModalDomicilio onGuardar={handleGuardarDomicilio} />
+      }
     </>
   );
 }

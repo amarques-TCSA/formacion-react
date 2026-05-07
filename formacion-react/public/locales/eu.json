@@ -2,7 +2,10 @@
   "palabras": {
     "guardar": "Gorde",
     "cancelar": "Utzi",
-    "guardarYSalir": "Gorde eta irten"
+    "guardarYSalir": "Gorde eta irten",
+    "editar": "Editatu",
+    "eliminar": "Ezabatu",
+    "anadir": "Gehitu"
   },
   "formulario": {
     "datosPersonales": "Datu pertsonalak",
