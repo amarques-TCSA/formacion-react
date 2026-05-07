@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { IApiRepository } from "@/shared/repositories/api/api.repository";
 import { UseFormReturn } from "node_modules/react-hook-form/dist/types/form";
 import { BuscadorForm } from "../models/buscador.schema";
+import { useFiltrosStore } from "../buscador.store";
 
 type BuscadorDatosProps = {
   apiRepository: IApiRepository;
@@ -45,7 +46,9 @@ const columnas: CabeceraListado<Resultado>[] = [
 export default function BuscadorDatos({ apiRepository, registro }: BuscadorDatosProps) {
   const { data: maestros } = ObtenerMaestrosBuscador({ apiRepository });
 
-  const queryResultadosBuscador = ObtenerResultadosBuscador({ apiRepository, filtros: registro.getValues() });
+  const { filtros } = useFiltrosStore();
+
+  const queryResultadosBuscador = ObtenerResultadosBuscador({ apiRepository, filtros});
   const resultados = queryResultadosBuscador.data.resultados;
 
   const elementos = resultados?.map((resultado): ElementoListadoProps<Resultado> => ({

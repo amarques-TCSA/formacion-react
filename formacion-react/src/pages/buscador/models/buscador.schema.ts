@@ -2,6 +2,7 @@ import { number, object, ObjectSchema, string } from "yup";
 
 export const schema: ObjectSchema<BuscadorForm> = object({
     fechaDesde: string()
+    .nullable()
     .typeError('La fecha desde no puede ser posterior a la fecha hasta')
     .test(
       'fechaHastaMayorQueFechaDesde',
@@ -15,6 +16,7 @@ export const schema: ObjectSchema<BuscadorForm> = object({
       },
     ),
   fechaHasta: string()
+  .nullable()
   .test(
     'fechaHastaNoMenorQueFechaDesde',
     '',

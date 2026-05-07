@@ -5,7 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import useKeyPressFormulario from "@/shared/hooks/keypress-formulario.hook";
 import { ObtenerMaestrosBuscador } from "../buscador.service";
 import { IApiRepository } from "@/shared/repositories/api";
-import { useFiltrosStore } from "../buscador.store";
+import { filtrosPorDefecto, useFiltrosStore } from "../buscador.store";
 
 type BuscadorFiltrosProps = {
   apiRepository: IApiRepository;
@@ -29,6 +29,12 @@ export default function BuscadorFiltros({ apiRepository, registro }: BuscadorFil
   });
 
   const { setFiltros } = useFiltrosStore();
+
+  const limpiarFiltros = () => {
+    const filtrosLimpios = { ...filtrosPorDefecto };
+    setFiltros(filtrosLimpios);
+    registro.reset(filtrosLimpios);
+  }
 
   return (
     <Form
@@ -103,7 +109,7 @@ export default function BuscadorFiltros({ apiRepository, registro }: BuscadorFil
         <Button
           variant="secundario"
           type="button"
-          onClick={() => registro.reset()}
+          onClick={limpiarFiltros}
         >
           Limpiar filtros
         </Button>

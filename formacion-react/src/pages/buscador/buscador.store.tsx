@@ -1,10 +1,10 @@
 import { create } from "zustand";
 import { BuscadorForm } from "./models/buscador.schema";
 
-const filtrosPorDefecto: BuscadorForm = {
-  fechaDesde: undefined,
-  fechaHasta: undefined,
-  idEstadoSolicitud: undefined,
+export const filtrosPorDefecto: BuscadorForm = {
+  fechaDesde: null,
+  fechaHasta: null,
+  idEstadoSolicitud: null,
 };
 
 type FiltrosStore = {

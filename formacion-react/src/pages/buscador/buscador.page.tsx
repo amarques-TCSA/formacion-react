@@ -12,7 +12,6 @@ type BuscadorPageProps = {
   apiRepository: IApiRepository;
 }
 
-
 export default function BuscadorPage({
   apiRepository
 }: BuscadorPageProps) {
@@ -20,7 +19,7 @@ export default function BuscadorPage({
 
   const registro = useForm<BuscadorForm>({
     resolver: yupResolver(schema),
-    defaultValues: filtros,
+    defaultValues: {...filtros},
   });
 
   return (
@@ -28,7 +27,6 @@ export default function BuscadorPage({
       title="Página de buscador"
       filtros={<BuscadorFiltros apiRepository={apiRepository} registro={registro} />}
       contenido={<Suspense><BuscadorResultados registro={registro} apiRepository={apiRepository} /></Suspense>}
-    >
-    </LayoutBuscador>
+    />
   );
 }
