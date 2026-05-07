@@ -1,11 +1,11 @@
-import { CabeceraListado, ElementoListadoProps, Listado, TiposOrden } from "@tracasa/tracasa-components";
+import { AccionListado, CabeceraListado, ElementoListadoProps, Listado, TiposOrden } from "@tracasa/tracasa-components";
 import { ObtenerMaestrosBuscador, ObtenerResultadosBuscador } from "../buscador.service";
 import { Resultado } from "../models/resultado.model";
 import dayjs from "dayjs";
 import { IApiRepository } from "@/shared/repositories/api/api.repository";
 import { UseFormReturn } from "node_modules/react-hook-form/dist/types/form";
 import { BuscadorForm } from "../models/buscador.schema";
-import { useFiltrosStore } from "../buscador.store";
+import { useBuscadorStore } from "../buscador.store";
 
 type BuscadorDatosProps = {
   apiRepository: IApiRepository;
@@ -45,11 +45,18 @@ const columnas: CabeceraListado<Resultado>[] = [
 
 export default function BuscadorDatos({ apiRepository, registro }: BuscadorDatosProps) {
   const { data: maestros } = ObtenerMaestrosBuscador({ apiRepository });
-
-  const { filtros } = useFiltrosStore();
+  const { filtros, setModalAbierta, setDatosModal } = useBuscadorStore();
 
   const queryResultadosBuscador = ObtenerResultadosBuscador({ apiRepository, filtros});
   const resultados = queryResultadosBuscador.data.resultados;
+
+  const accionAccesoElemento : AccionListado<Resultado> = {
+    textoDescriptivo: 'Acceso al elemento',
+    accion: (resultado) => {
+      setDatosModal(resultado);
+      setModalAbierta(true);
+    }
+  }
 
   const elementos = resultados?.map((resultado): ElementoListadoProps<Resultado> => ({
     id: resultado.id,
@@ -57,6 +64,8 @@ export default function BuscadorDatos({ apiRepository, registro }: BuscadorDatos
     fechaRegistro: dayjs(resultado.fechaRegistro),
     estadoSolicitud: maestros?.estadosSolicitud.find(e => e.id === resultado.idEstadoSolicitud)?.descripcion || '',
     estadoCivil: maestros?.estadosCiviles.find(ec => ec.id === resultado.idEstadoCivil)?.descripcion || '',
+    accionPrincipal: accionAccesoElemento,
+    acciones: [accionAccesoElemento],
   }));
 
   return (
