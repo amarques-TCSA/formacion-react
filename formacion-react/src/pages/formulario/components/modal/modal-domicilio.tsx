@@ -25,7 +25,7 @@ type ModalDomicilioProps = {
 export default function ModalDomicilio({ onGuardar, formularioRepository }: ModalDomicilioProps) {
   const cerrarModal = useModalDomicilioStore(x => x.cerrarModal);
   const domicilio = useModalDomicilioStore(x => x.domicilio);
-  const isOpen = useModalDomicilioStore(x => x.isOpen);
+  const isOpen = useModalDomicilioStore(x => x.abierto);
 
   const { ciudades, provincias, tiposResidencia } = ObtenerFormularioMaestros({ formularioRepository });
 

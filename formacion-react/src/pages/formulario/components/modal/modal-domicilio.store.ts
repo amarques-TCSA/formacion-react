@@ -2,19 +2,19 @@ import { create } from 'zustand';
 import { Domicilio } from '../secciones/domicilios/domicilios.model';
 
 type ModalDomicilioStore = {
-  isOpen: boolean;
+  abierto: boolean;
   domicilio: Domicilio | null;
   abrirModal: (domicilio?: Domicilio) => void;
   cerrarModal: () => void;
 };
 
 export const useModalDomicilioStore = create<ModalDomicilioStore>((set) => ({
-  isOpen: false,
+  abierto: false,
   domicilio: null,
   abrirModal: (domicilio) =>
     set({
-      isOpen: true,
+      abierto: true,
       domicilio: domicilio ?? null,
     }),
-  cerrarModal: () => set({ isOpen: false, domicilio: null }),
+  cerrarModal: () => set({ abierto: false, domicilio: null }),
 }));

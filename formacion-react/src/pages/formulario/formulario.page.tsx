@@ -13,7 +13,7 @@ import {
 } from '@tracasa/tracasa-components';
 
 import { useFormHook } from '@/shared/hooks/use-form-hook';
-import { FormularioHttpRepository } from '@/shared/repositories/formulario';
+import { IFormularioRepository } from '@/shared/repositories/formulario';
 
 import DatosPersonalesSection from './components/secciones/datos-personales/datos-personales.section';
 import DocumentoIdentidadSection from './components/secciones/documento-identidad/documento-identidad.section';
@@ -23,8 +23,11 @@ import { formularioSeccionesSchema } from './models/formulario.schema';
 import { defaultFormularioValues } from './models/formulario';
 import { EnviarFormulario } from './queries/formulario.queries';
 
-export default function FormularioPage() {
-  const formularioRepository = FormularioHttpRepository();
+type FormularioPageProps = {
+  formularioRepository: IFormularioRepository;
+};
+
+export default function FormularioPage({ formularioRepository }: FormularioPageProps) {
 
   const registro = useForm<FormularioSeccionesForm>({
     mode: 'onSubmit',
