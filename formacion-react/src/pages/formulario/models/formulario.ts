@@ -11,5 +11,6 @@ export const defaultFormularioValues = {
   numeroDocumento: undefined,
   fechaExpedicionDocumento: undefined,
   fechaCaducidadDocumento: undefined,
-  autoridadEmisoraDocumento: undefined
+  autoridadEmisoraDocumento: undefined,
+  domicilios: [],
 }

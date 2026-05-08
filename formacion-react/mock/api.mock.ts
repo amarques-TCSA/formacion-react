@@ -44,6 +44,35 @@ export default defineMock(
             delay: 500
         },
         {
+            url: '/api/formulario/domicilios',
+            body: [
+                {
+                    id: 1,
+                    calle: 'Garajonay',
+                    numero: '11',
+                    codigoPostal: '31621',
+                    ciudad: 'sarriguren',
+                    provincia: 'navarra',
+                    tipoResidencia: 'propia',
+                    fechaInicio: '22/03/2020',
+                    actual: '✓',
+                },
+                {
+                    id: 2,
+                    calle: 'C. Bardenas Reales',
+                    numero: '52-54',
+                    codigoPostal: '31621',
+                    ciudad: 'sarriguren',
+                    provincia: 'navarra',
+                    tipoResidencia: 'alquiler',
+                    fechaInicio: '25/11/2003',
+                    actual: '✕',
+                },
+            ],
+            method: 'GET',
+            delay: 500
+        },
+        {
             //revisar datos mock para el envío del formulario
             url: '/api/formulario/enviar',
             method: 'POST',

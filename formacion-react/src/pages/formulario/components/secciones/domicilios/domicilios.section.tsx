@@ -11,42 +11,18 @@ import {
   TiposOrden,
 } from '@tracasa/tracasa-components';
 import { t } from 'i18next';
-import { useState } from 'react';
+import { Control, useFieldArray } from 'react-hook-form';
 
 import ModalDomicilio from '../../modal/modal-domicilio';
 import { useModalDomicilioStore } from '../../modal/modal-domicilio.store';
 import { IFormularioRepository } from '@/shared/repositories/formulario';
+import { FormularioSeccionesForm } from '../../../models/formulario.model';
 import {
   defaultFormularioValues,
   DomicilioForm,
   DomicilioItem,
   DomicilioListado,
 } from './domicilios.model';
-
-const domiciliosIniciales: DomicilioItem[] = [
-  {
-    id: 1,
-    calle: 'Garajonay',
-    numero: '11',
-    codigoPostal: '31621',
-    ciudad: 'sarriguren',
-    provincia: 'navarra',
-    tipoResidencia: 'propia',
-    fechaInicio: '22/03/2020',
-    actual: '✓',
-  },
-  {
-    id: 2,
-    calle: 'C. Bardenas Reales',
-    numero: '52-54',
-    codigoPostal: '31621',
-    ciudad: 'sarriguren',
-    provincia: 'navarra',
-    tipoResidencia: 'alquiler',
-    fechaInicio: '25/11/2003',
-    actual: '✕',
-  },
-];
 
 const tipoResidenciaLabels: Record<string, string> = {
   propia: 'Propia',
@@ -88,13 +64,27 @@ const columnasDomicilios = createColumnDefs(
   ],
 );
 
-export default function DomicilioSection({ formularioRepository }: { formularioRepository: IFormularioRepository }) {
+type DomicilioSectionProps = {
+  control: Control<FormularioSeccionesForm>;
+  formularioRepository: IFormularioRepository;
+};
+
+export default function DomicilioSection({ control, formularioRepository }: DomicilioSectionProps) {
   const abrirModal = useModalDomicilioStore((state) => state.abrirModal);
-  const [domicilios, setDomicilios] = useState(domiciliosIniciales);
   const domicilio = useModalDomicilioStore((state) => state.domicilio);
 
+  const { fields: domicilios, append, update, remove } = useFieldArray({
+    control,
+    name: 'domicilios',
+    keyName: 'fieldId',
+  });
+
   const handleEliminarDomicilio = (id: number) => {
-    setDomicilios((prev) => prev.filter((domicilio) => domicilio.id !== id));
+    const index = domicilios.findIndex((item) => item.id === id);
+    if (index < 0) {
+      return;
+    }
+    remove(index);
   };
 
   const handleEditarDomicilio = (id: number) => {
@@ -109,16 +99,15 @@ export default function DomicilioSection({ formularioRepository }: { formularioR
 
   const handleGuardarDomicilio = (datos: DomicilioForm, idEdicion?: number) => {
     if (idEdicion) {
-      setDomicilios((prev) =>
-        prev.map((domicilio) =>
-          domicilio.id === idEdicion
-            ? {
-              ...domicilio,
-              ...datos,
-            }
-            : domicilio,
-        ),
-      );
+      const index = domicilios.findIndex((item) => item.id === idEdicion);
+      if (index < 0) {
+        return;
+      }
+
+      update(index, {
+        ...domicilios[index],
+        ...datos,
+      });
       return;
     }
 
@@ -134,7 +123,7 @@ export default function DomicilioSection({ formularioRepository }: { formularioR
       actual: '✕',
     };
 
-    setDomicilios((prev) => [...prev, nuevoDomicilio]);
+    append(nuevoDomicilio);
   };
 
   const domiciliosListado: ElementoListadoProps<DomicilioListado>[] = domicilios.map((domicilio) => ({

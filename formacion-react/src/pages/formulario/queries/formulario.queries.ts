@@ -22,6 +22,13 @@ export const ObtenerFormularioMaestros = ({ formularioRepository }: ObtenerFormu
   };
 };
 
+export const ObtenerFormularioDomicilios = ({ formularioRepository }: ObtenerFormularioMaestrosProps) => {
+  return useQuery({
+    queryKey: ['formulario', 'domicilios'],
+    queryFn: () => formularioRepository.obtenerDomicilios(),
+  });
+};
+
 type EnviarFormularioProps = {
   formularioRepository: IFormularioRepository;
 };

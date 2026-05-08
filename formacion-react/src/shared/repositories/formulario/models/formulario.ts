@@ -1,5 +1,17 @@
 type MaestroItem = { id: number; descripcion: string };
 
+export type FormularioDomicilio = {
+  id: number;
+  calle: string;
+  numero: string;
+  codigoPostal: string;
+  ciudad: string;
+  provincia: string;
+  tipoResidencia: string;
+  fechaInicio: string;
+  actual: string;
+};
+
 export type FormularioMaestros = {
   nacionalidades: MaestroItem[];
   estadosCiviles: MaestroItem[];

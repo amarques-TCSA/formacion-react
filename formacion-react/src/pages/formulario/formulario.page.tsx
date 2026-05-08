@@ -32,8 +32,13 @@ export default function FormularioPage({ formularioRepository }: FormularioPageP
   const registro = useForm<FormularioSeccionesForm>({
     mode: 'onSubmit',
     resolver: yupResolver(formularioSeccionesSchema),
-    defaultValues: {
-      ...defaultFormularioValues
+    defaultValues: async (): Promise<FormularioSeccionesForm> => {
+      const domicilios = await formularioRepository.obtenerDomicilios();
+
+      return {
+        ...defaultFormularioValues,
+        domicilios,
+      };
     },
   });
 
@@ -42,6 +47,9 @@ export default function FormularioPage({ formularioRepository }: FormularioPageP
   const { control, reset, formState: { errors } } = registro;
 
   const onSubmit = (data: FormularioSeccionesForm) => {
+    const { domicilios, ...formulario } = data;
+    console.log('Datos del formulario:', formulario);
+    console.log('Domicilios:', domicilios);
     guardar(data);
   };
 
@@ -73,7 +81,7 @@ export default function FormularioPage({ formularioRepository }: FormularioPageP
         <SectionGroup>
           <DatosPersonalesSection control={control} errors={errors} formularioRepository={formularioRepository} />
           <DocumentoIdentidadSection control={control} errors={errors} />
-          <DomicilioSection formularioRepository={formularioRepository} />
+          <DomicilioSection control={control} formularioRepository={formularioRepository} />
         </SectionGroup>
 
         <BarraLateral>
