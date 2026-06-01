@@ -21,7 +21,7 @@ import DomicilioSection from './components/secciones/domicilios/domicilios.secti
 import { FormularioSeccionesForm } from './models/formulario.model';
 import { formularioSeccionesSchema } from './models/formulario.schema';
 import { defaultFormularioValues } from './models/formulario';
-import { EnviarFormulario } from './queries/formulario.queries';
+import { EnviarFormulario } from './formulario.queries';
 
 type FormularioPageProps = {
   formularioRepository: IFormularioRepository;

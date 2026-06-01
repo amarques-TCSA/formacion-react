@@ -1,10 +1,10 @@
 import { FormularioHttpRepository } from "@/shared/repositories/formulario";
-import FormularioPage from "./formulario.page";
+import FormularioPage from "./formulario.service";
 
 export default function Formulario() {
-    const formularioRepository = FormularioHttpRepository();
+  const formularioRepository = FormularioHttpRepository();
 
-	return <>
+  return <>
     <FormularioPage formularioRepository={formularioRepository} />
   </>;
 }
