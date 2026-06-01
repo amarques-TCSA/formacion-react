@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { IFormularioRepository, mapToOpciones } from '@/shared/repositories/formulario';
+import { EnviarFormularioRequest, IFormularioRepository, mapToOpciones } from '@/shared/repositories/formulario';
 
 type ObtenerFormularioMaestrosProps = {
   formularioRepository: IFormularioRepository;
@@ -35,7 +35,7 @@ type EnviarFormularioProps = {
 
 export const EnviarFormulario = ({ formularioRepository }: EnviarFormularioProps) => {
   return useMutation({
-    mutationFn: (data: unknown) => formularioRepository.enviarFormulario(data as Record<string, unknown>),
+    mutationFn: (data: EnviarFormularioRequest) => formularioRepository.enviarFormulario(data),
     onSuccess: (response) => {
       console.log('Formulario enviado:', response);
     },

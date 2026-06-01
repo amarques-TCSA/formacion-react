@@ -20,6 +20,13 @@ export default function DocumentoIdentidadSection({
   control,
   errors,
 }: DocumentoIdentidadSectionProps) {
+
+  const tiposDocumento = [
+    { id: 'dni', texto: t('formulario.opcionDocumentoDni') },
+    { id: 'pasaporte', texto: t('formulario.opcionDocumentoPasaporte') },
+    { id: 'nie', texto: t('formulario.opcionDocumentoNie') },
+  ];
+
   return (
     <Section title={t('formulario.documentoIdentidad')} id="documentoIdentidad">
       <FormGrid>
@@ -36,11 +43,7 @@ export default function DocumentoIdentidadSection({
                 permitirBusqueda
                 mostrarX={true}
                 id="tipoDocumento"
-                opciones={[
-                  { id: 'dni', texto: t('formulario.opcionDocumentoDni') },
-                  { id: 'pasaporte', texto: t('formulario.opcionDocumentoPasaporte') },
-                  { id: 'nie', texto: t('formulario.opcionDocumentoNie') },
-                ]}
+                opciones={tiposDocumento}
                 idSeleccionado={field.value?.toString() ?? null}
                 onChange={field.onChange}
                 error={!!errors.tipoDocumento}
