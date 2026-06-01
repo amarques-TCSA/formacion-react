@@ -13,7 +13,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { DomicilioForm } from '../secciones/domicilios/domicilios.model';
 import { domiciliosSchema } from '../secciones/domicilios/domicilios.schema';
 import { IFormularioRepository } from '@/shared/repositories/formulario';
-import { ObtenerFormularioMaestros } from '../../formulario.queries';
+import { ObtenerFormularioMaestros } from '../../formulario.service';
 import { useModalDomicilioStore } from './modal-domicilio.store';
 import { yupResolver } from '@hookform/resolvers/yup';
 

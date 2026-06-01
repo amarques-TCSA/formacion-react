@@ -11,7 +11,7 @@ import { t } from 'i18next';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
 
 import { IFormularioRepository } from '@/shared/repositories/formulario';
-import { ObtenerFormularioMaestros } from '../../../formulario.queries';
+import { ObtenerFormularioMaestros } from '../../../formulario.service';
 import { FormularioSeccionesForm } from '../../../models/formulario.model';
 
 type DatosPersonalesSectionProps = {
