@@ -20,7 +20,7 @@ import { FormularioSeccionesForm } from '../../../models/formulario.model';
 import {
   defaultFormularioValues,
   DomicilioForm,
-  DomicilioItem,
+  DomicilioId,
   DomicilioListado,
 } from './domicilios.model';
 
@@ -30,7 +30,7 @@ const tipoResidenciaLabels: Record<string, string> = {
   cedida: 'Cedida',
 };
 
-const columnasDomicilios = createColumnDefs(
+const columnas = createColumnDefs(
   createColumnHelper<ElementoListadoProps<DomicilioListado>>(),
   [
     {
@@ -116,11 +116,11 @@ export default function DomicilioSection({ control, formularioRepository }: Domi
         ? Math.max(...domicilios.map((domicilio) => domicilio.id)) + 1
         : 1;
 
-    const nuevoDomicilio: DomicilioItem = {
+    const nuevoDomicilio: DomicilioId = {
       id: siguienteId,
       ...datos,
       fechaInicio: new Date().toLocaleDateString('es-ES'),
-      actual: '✕',
+      actual: false,
     };
 
     append(nuevoDomicilio);
@@ -133,7 +133,7 @@ export default function DomicilioSection({ control, formularioRepository }: Domi
     )}, ${normalizeString(domicilio.provincia)}`,
     tipoResidencia: tipoResidenciaLabels[domicilio.tipoResidencia] ?? domicilio.tipoResidencia,
     fechaInicio: domicilio.fechaInicio,
-    actual: domicilio.actual,
+    actual: domicilio.actual ? t('palabras.si') : t('palabras.no'),
     acciones: [
       {
         textoDescriptivo: t('palabras.editar'),
@@ -153,7 +153,7 @@ export default function DomicilioSection({ control, formularioRepository }: Domi
 
         <ListadoPaginado
           datos={domiciliosListado}
-          columnas={columnasDomicilios}
+          columnas={columnas}
           indice={0}
           tamanoPagina={5}
           ordenarPor="fechaInicio"
@@ -169,7 +169,11 @@ export default function DomicilioSection({ control, formularioRepository }: Domi
       </Section>
 
       {
-        domicilio && <ModalDomicilio onGuardar={handleGuardarDomicilio} formularioRepository={formularioRepository} />
+        domicilio &&
+          <ModalDomicilio
+            onGuardar={handleGuardarDomicilio}
+            formularioRepository={formularioRepository}
+          />
       }
     </>
   );

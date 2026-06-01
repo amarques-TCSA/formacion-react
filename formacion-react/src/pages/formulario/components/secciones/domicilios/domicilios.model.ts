@@ -20,10 +20,10 @@ export type Domicilio = DomicilioForm & {
   id: number;
 };
 
-export type DomicilioItem = DomicilioForm & {
+export type DomicilioId = DomicilioForm & {
   id: number;
   fechaInicio: string;
-  actual: string;
+  actual: boolean;
 };
 
 export type DomicilioListado = {

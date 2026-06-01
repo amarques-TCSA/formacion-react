@@ -7,7 +7,7 @@ import { domiciliosSchema } from '../components/secciones/domicilios/domicilios.
 const domicilioItemSchema = domiciliosSchema.shape({
 	id: yup.number().required(),
 	fechaInicio: yup.string().required(),
-	actual: yup.string().required(),
+	actual: yup.boolean().required(),
 });
 
 export const formularioSeccionesSchema = datosPersonalesSchema

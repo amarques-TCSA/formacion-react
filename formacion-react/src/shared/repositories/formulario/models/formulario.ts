@@ -1,16 +1,8 @@
+import {  DomicilioId } from "@/pages/formulario/components/secciones/domicilios/domicilios.model";
+
 type MaestroItem = { id: number; descripcion: string };
 
-export type FormularioDomicilio = {
-  id: number;
-  calle: string;
-  numero: string;
-  codigoPostal: string;
-  ciudad: string;
-  provincia: string;
-  tipoResidencia: string;
-  fechaInicio: string;
-  actual: string;
-};
+export type FormularioDomicilio = DomicilioId;
 
 export type FormularioMaestros = {
   nacionalidades: MaestroItem[];

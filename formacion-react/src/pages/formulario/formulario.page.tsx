@@ -79,9 +79,17 @@ export default function FormularioPage({ formularioRepository }: FormularioPageP
 
       <Main>
         <SectionGroup>
-          <DatosPersonalesSection control={control} errors={errors} formularioRepository={formularioRepository} />
+          <DatosPersonalesSection
+            control={control}
+            errors={errors}
+            formularioRepository={formularioRepository} />
+
           <DocumentoIdentidadSection control={control} errors={errors} />
-          <DomicilioSection control={control} formularioRepository={formularioRepository} />
+
+          <DomicilioSection
+            control={control}
+            formularioRepository={formularioRepository}
+          />
         </SectionGroup>
 
         <BarraLateral>
