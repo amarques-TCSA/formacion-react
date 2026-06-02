@@ -7,19 +7,6 @@ export type DomicilioForm = {
   tipoResidencia: string;
 };
 
-export const defaultFormularioValues = {
-  calle: '',
-  numero: '',
-  codigoPostal: '',
-  ciudad: '',
-  provincia: '',
-  tipoResidencia: '',
-};
-
-export type Domicilio = DomicilioForm & {
-  id: number;
-};
-
 export type DomicilioId = DomicilioForm & {
   id: number;
   fechaInicio: string;
@@ -33,3 +20,11 @@ export type DomicilioListado = {
   actual: string;
 };
 
+export const defaultFormularioValues = {
+  calle: '',
+  numero: '',
+  codigoPostal: '',
+  ciudad: '',
+  provincia: '',
+  tipoResidencia: '',
+};

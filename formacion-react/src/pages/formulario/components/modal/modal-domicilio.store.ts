@@ -1,10 +1,10 @@
 import { create } from 'zustand';
-import { Domicilio } from '../secciones/domicilios/domicilios.model';
+import { DomicilioId } from '../secciones/domicilios/domicilios.model';
 
 type ModalDomicilioStore = {
   abierto: boolean;
-  domicilio: Domicilio | null;
-  abrirModal: (domicilio?: Domicilio) => void;
+  domicilio: DomicilioId | null;
+  abrirModal: (domicilio?: DomicilioId) => void;
   cerrarModal: () => void;
 };
 

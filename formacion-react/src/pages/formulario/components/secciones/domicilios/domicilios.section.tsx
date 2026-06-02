@@ -162,7 +162,7 @@ export default function DomicilioSection({ control, formularioRepository }: Domi
         />
 
         <RowLayout justifyContent='end'>
-          <Button variant="principal" onClick={() => abrirModal({ ...defaultFormularioValues, id: 0 })}>
+          <Button variant="principal" onClick={() => abrirModal({ ...defaultFormularioValues, id: 0, fechaInicio: '', actual: false })}>
             {t('palabras.anadir')}
           </Button>
         </RowLayout>
@@ -170,10 +170,10 @@ export default function DomicilioSection({ control, formularioRepository }: Domi
 
       {
         domicilio &&
-          <ModalDomicilio
-            onGuardar={handleGuardarDomicilio}
-            formularioRepository={formularioRepository}
-          />
+        <ModalDomicilio
+          onGuardar={handleGuardarDomicilio}
+          formularioRepository={formularioRepository}
+        />
       }
     </>
   );
