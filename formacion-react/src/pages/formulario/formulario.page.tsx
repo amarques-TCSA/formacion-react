@@ -1,347 +1,101 @@
-import { BarraHerramientas, BarraLateral, Button, FormField, FormGrid, IndiceLateral, Input, InputDate, InputDateTime, Main, Section, SectionGroup, Selector } from "@tracasa/tracasa-components";
-import { t } from "i18next";
-import { Controller, useForm } from "react-hook-form";
+import { t } from 'i18next';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 
-type ModalCreacionEventoEspecialForm = {
-  nombre: string;
-  primerApellido: string;
-  segundoApellido: string;
-  lugarNacimiento: string;
-  nacionalidad: string;
-  estadoCivil: string;
-  fechaRegistro: string;
-  fechaNacimiento: string;
-  tipoDocumento: string;
-  numeroDocumento: string;
-  fechaExpedicionDocumento: string;
-  fechaCaducidadDocumento: string;
-  autoridadEmisoraDocumento: string;
-}
+import {
+  BarraHerramientas,
+  BarraLateral,
+  Button,
+  Form,
+  IndiceLateral,
+  Main,
+  SectionGroup,
+} from '@tracasa/tracasa-components';
 
-export default function FormularioPage() {
+import { useFormHook } from '@/shared/hooks/use-form-hook';
+import { IFormularioRepository } from '@/shared/repositories/formulario';
 
-  const {
-    control,
-    formState: { errors },
-  } = useForm<ModalCreacionEventoEspecialForm>({
-    mode: 'onChange',
-    defaultValues: {
-      nombre: undefined,
-      primerApellido: undefined,
-      segundoApellido: undefined,
-      lugarNacimiento: undefined,
-      estadoCivil: undefined,
-      nacionalidad: undefined,
-      fechaRegistro: undefined,
-      fechaNacimiento: undefined,
-      tipoDocumento: undefined,
-      numeroDocumento: undefined,
-      fechaExpedicionDocumento: undefined,
-      fechaCaducidadDocumento: undefined,
-      autoridadEmisoraDocumento: undefined,
+import DatosPersonalesSection from './components/secciones/datos-personales/datos-personales.section';
+import DocumentoIdentidadSection from './components/secciones/documento-identidad/documento-identidad.section';
+import DomicilioSection from './components/secciones/domicilios/domicilios.section';
+import { FormularioSeccionesForm } from './models/formulario.model';
+import { formularioSeccionesSchema } from './models/formulario.schema';
+import { defaultFormularioValues } from './models/formulario';
+import { EnviarFormulario } from './formulario.service';
+
+type FormularioPageProps = {
+  formularioRepository: IFormularioRepository;
+};
+
+export default function FormularioPage({ formularioRepository }: FormularioPageProps) {
+
+  const registro = useForm<FormularioSeccionesForm>({
+    mode: 'onSubmit',
+    resolver: yupResolver(formularioSeccionesSchema),
+    defaultValues: async (): Promise<FormularioSeccionesForm> => {
+      const domicilios = await formularioRepository.obtenerDomicilios();
+
+      return {
+        ...defaultFormularioValues,
+        domicilios,
+      };
     },
   });
 
-  return <>
-    <BarraHerramientas>
-      <Button onClick={() => { }}>
-        {t('palabras.cancelar')}
-      </Button>
-      <Button
-        opciones={[
-          {
-            onClick: () => { },
-            text: t('palabras.guardar'),
-          },
-          {
-            onClick: () => { },
-            text: t('palabras.guardarYSalir'),
-          },
-        ]}
-        variant="principal"
-        conOpciones
-      >
-        {t('palabras.guardar')}
-      </Button>
-    </BarraHerramientas>
-    <Main>
-      <SectionGroup>
-        <Section
-          title={t('formulario.datosPersonales')}
-          id="datosPersonales"
+  const { mutate: guardar } = EnviarFormulario({ formularioRepository });
+
+  const { control, reset, formState: { errors } } = registro;
+
+  const onSubmit = (data: FormularioSeccionesForm) => {
+    const { domicilios, ...formulario } = data;
+    console.log('Datos del formulario:', formulario);
+    console.log('Domicilios:', domicilios);
+    guardar(data);
+  };
+
+  const { handleKeyPress } = useFormHook({
+    registro,
+    onSubmit,
+  });
+
+  return (
+    <Form
+      registro={registro}
+      onReset={reset}
+      onSubmit={onSubmit}
+      data-testid="buscador-expedientes-fiscalia-form"
+      onKeyDown={handleKeyPress}
+    >
+      <BarraHerramientas>
+        <Button onClick={() => { }}>{t('palabras.cancelar')}</Button>
+        <Button
+          type="submit"
+          variant="principal"
+          conOpciones
         >
-          <FormGrid>
-            <FormField
-              id="nombre"
-              labelText={t('formulario.nombre')}
-              error={errors.nombre}
-            >
-              <Controller
-                name="nombre"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    id="nombre"
-                    type="text"
-                    value={field.value ?? ''}
-                    onChange={field.onChange}
-                    error={!!errors.nombre}
-                  />
-                )}
-              />
-            </FormField>
+          {t('palabras.guardar')}
+        </Button>
+      </BarraHerramientas>
 
-            <FormField
-              id="primerApellido"
-              labelText={t('formulario.primerApellido')}
-              error={errors.primerApellido}
-            >
-              <Controller
-                name="primerApellido"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    id="primerApellido"
-                    type="text"
-                    value={field.value ?? ''}
-                    onChange={field.onChange}
-                    error={!!errors.primerApellido}
-                  />
-                )}
-              />
-            </FormField>
+      <Main>
+        <SectionGroup>
+          <DatosPersonalesSection
+            control={control}
+            errors={errors}
+            formularioRepository={formularioRepository} />
 
-            <FormField
-              id="segundoApellido"
-              labelText={t('formulario.segundoApellido')}
-              error={errors.segundoApellido}
-            >
-              <Controller
-                name="segundoApellido"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    id="segundoApellido"
-                    type="text"
-                    value={field.value ?? ''}
-                    onChange={field.onChange}
-                    error={!!errors.segundoApellido}
-                  />
-                )}
-              />
-            </FormField>
+          <DocumentoIdentidadSection control={control} errors={errors} />
 
-            <FormField
-              labelText={t('formulario.fechaRegistro')}
-              error={errors?.fechaRegistro}
-              id="fechaRegistro"
-            >
-              <Controller
-                name="fechaRegistro"
-                control={control}
-                render={({ field }) => (
-                  <InputDateTime
-                    id="fechaRegistro"
-                    error={!!errors?.fechaRegistro}
-                    value={field.value ? new Date(field.value) : undefined}
-                    onChange={field.onChange}
-                  />
-                )}
-              />
-            </FormField>
+          <DomicilioSection
+            control={control}
+            formularioRepository={formularioRepository}
+          />
+        </SectionGroup>
 
-            <FormField
-              labelText={t('formulario.fechaNacimiento')}
-              error={errors?.fechaNacimiento}
-              id="fechaNacimiento"
-            >
-              <Controller
-                name="fechaNacimiento"
-                control={control}
-                render={({ field }) => (
-                  <InputDate
-                    id="fechaNacimiento"
-                    error={!!errors?.fechaNacimiento}
-                    value={field.value ?? ''}
-                    onChange={field.onChange}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              id="lugarNacimiento"
-              labelText={t('formulario.lugarNacimiento')}
-              error={errors.lugarNacimiento}
-            >
-              <Controller
-                name="lugarNacimiento"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    id="lugarNacimiento"
-                    type="text"
-                    value={field.value ?? ''}
-                    onChange={field.onChange}
-                    error={!!errors.lugarNacimiento}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField labelText={t('formulario.nacionalidad')} id="nacionalidad">
-              <Controller
-                control={control}
-                name="nacionalidad"
-                render={({ field }) => (
-                  <Selector
-                    permitirBusqueda
-                    mostrarX={true}
-                    id="nacionalidad"
-                    opciones={[]}
-                    idSeleccionado={field.value?.toString() ?? null}
-                    onChange={field.onChange}
-                    error={!!errors.nacionalidad}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField labelText={t('formulario.estadoCivil')} id="estadoCivil">
-              <Controller
-                control={control}
-                name="estadoCivil"
-                render={({ field }) => (
-                  <Selector
-                    permitirBusqueda
-                    mostrarX={true}
-                    id="estadoCivil"
-                    opciones={[]}
-                    idSeleccionado={field.value?.toString() ?? null}
-                    onChange={field.onChange}
-                    error={!!errors.estadoCivil}
-                  />
-                )}
-              />
-            </FormField>
-          </FormGrid>
-        </Section>
-
-        <Section
-          title="Documento de identidad"
-          id="documentoIdentidad"
-        >
-          <FormGrid>
-            <FormField
-              id="tipoDocumento"
-              labelText="Tipo de documento"
-              error={errors.tipoDocumento}
-            >
-              <Controller
-                name="tipoDocumento"
-                control={control}
-                render={({ field }) => (
-                  <Selector
-                    permitirBusqueda
-                    mostrarX={true}
-                    id="tipoDocumento"
-                    opciones={[
-                      { id: 'dni', texto: 'DNI' },
-                      { id: 'pasaporte', texto: 'Pasaporte' },
-                      { id: 'nie', texto: 'NIE' },
-                    ]}
-                    idSeleccionado={field.value?.toString() ?? null}
-                    onChange={field.onChange}
-                    error={!!errors.tipoDocumento}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              id="numeroDocumento"
-              labelText="Numero de documento"
-              error={errors.numeroDocumento}
-            >
-              <Controller
-                name="numeroDocumento"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    id="numeroDocumento"
-                    type="text"
-                    value={field.value ?? ''}
-                    onChange={field.onChange}
-                    error={!!errors.numeroDocumento}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              labelText="Fecha expedicion"
-              error={errors?.fechaExpedicionDocumento}
-              id="fechaExpedicionDocumento"
-            >
-              <Controller
-                name="fechaExpedicionDocumento"
-                control={control}
-                render={({ field }) => (
-                  <InputDate
-                    id="fechaExpedicionDocumento"
-                    error={!!errors?.fechaExpedicionDocumento}
-                    value={field.value ?? ''}
-                    onChange={field.onChange}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              labelText="Fecha caducidad"
-              error={errors?.fechaCaducidadDocumento}
-              id="fechaCaducidadDocumento"
-            >
-              <Controller
-                name="fechaCaducidadDocumento"
-                control={control}
-                render={({ field }) => (
-                  <InputDate
-                    id="fechaCaducidadDocumento"
-                    error={!!errors?.fechaCaducidadDocumento}
-                    value={field.value ?? ''}
-                    onChange={field.onChange}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              id="autoridadEmisoraDocumento"
-              labelText="Pais / Autoridad emisora"
-              error={errors.autoridadEmisoraDocumento}
-              fullWidth
-            >
-              <Controller
-                name="autoridadEmisoraDocumento"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    id="autoridadEmisoraDocumento"
-                    type="text"
-                    value={field.value ?? ''}
-                    onChange={field.onChange}
-                    error={!!errors.autoridadEmisoraDocumento}
-                  />
-                )}
-              />
-            </FormField>
-          </FormGrid>
-        </Section>
-      </SectionGroup>
-      <BarraLateral>
-        <IndiceLateral />
-      </BarraLateral>
-    </Main>
-  </>;
+        <BarraLateral>
+          <IndiceLateral />
+        </BarraLateral>
+      </Main>
+    </Form>
+  );
 }
