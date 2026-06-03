@@ -7,18 +7,18 @@ type ObtenerFormularioMaestrosProps = {
 };
 
 export const ObtenerFormularioMaestros = ({ formularioRepository }: ObtenerFormularioMaestrosProps) => {
-  const query = useQuery({
-    queryKey: ['formulario', 'maestros'],
-    queryFn: () => formularioRepository.obtenerMaestros(),
-  });
+  const { data: { nacionalidades, estadosCiviles, ciudades, provincias, tiposResidencia } = {} }
+    = useQuery({
+      queryKey: ['formulario', 'maestros'],
+      queryFn: () => formularioRepository.obtenerMaestros(),
+    });
 
   return {
-    ...query,
-    nacionalidades: mapToOpciones(query.data?.nacionalidades ?? []),
-    estadosCiviles: mapToOpciones(query.data?.estadosCiviles ?? []),
-    ciudades: mapToOpciones(query.data?.ciudades ?? []),
-    provincias: mapToOpciones(query.data?.provincias ?? []),
-    tiposResidencia: mapToOpciones(query.data?.tiposResidencia ?? []),
+    nacionalidades: mapToOpciones(nacionalidades ?? []),
+    estadosCiviles: mapToOpciones(estadosCiviles ?? []),
+    ciudades: mapToOpciones(ciudades ?? []),
+    provincias: mapToOpciones(provincias ?? []),
+    tiposResidencia: mapToOpciones(tiposResidencia ?? []),
   };
 };
 
