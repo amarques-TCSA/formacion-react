@@ -23,7 +23,7 @@ export default function AppRouter() {
 
   const router = createHashRouter([
     { path: '*', element: <>No existe esta página</> },
-    { path: Routes.inicio.relativePath, element: <Inicio /> },
+    { path: Routes.inicio.relativePath, element: <AppLayout />, children: [{path: '', element: <Inicio />} ] },
     {
       path: Routes.root.relativePath,
       element: <AppLayout />,
