@@ -1,0 +1,100 @@
+{
+  "palabras": {
+    "guardar": "Gorde",
+    "cancelar": "Utzi",
+    "guardarYSalir": "Gorde eta irten",
+    "editar": "Editatu",
+    "eliminar": "Ezabatu",
+    "anadir": "Gehitu"
+  },
+  "formulario": {
+    "datosPersonales": "Datu pertsonalak",
+    "nombre": "Izena",
+    "apellidos": "Abizenak",
+    "primerApellido": "Lehen abizena",
+    "segundoApellido": "Bigarren abizena",
+    "lugarNacimiento": "Jaioterria",
+    "nacionalidad": "Nacionalitatea",
+    "estadoCivil": "Egoera zibila",
+    "fechaRegistro": "Erregistro data",
+    "fechaNacimiento": "Jaiotze data",
+    "documentoIdentidad": "Nortasun agiria",
+    "tipoDocumento": "Agiri mota",
+    "numeroDocumento": "Agiri zenbakia",
+    "fechaExpedicionDocumento": "Jaulkipen data",
+    "fechaCaducidadDocumento": "Iraungitze data",
+    "autoridadEmisoraDocumento": "Herrialdea / Agintaritza jaulkitzailea",
+    "opcionDocumentoDni": "NAN",
+    "opcionDocumentoPasaporte": "Pasaportea",
+    "opcionDocumentoNie": "AIZ",
+    "domicilio": "Helbidea",
+    "mensajeDomicilio": "Kontuan izan helbide bat gehitzean...",
+    "modal": {
+      "titulo": "Helbidea",
+      "subtitulo": "Helbidea gehitu",
+      "calle": "Kalea / bidea",
+      "numero": "Zenbakia",
+      "codigoPostal": "Posta kodea",
+      "ciudad": "Hiria",
+      "provincia": "Probintzia",
+      "tipoResidencia": "Egoitza mota",
+      "opcionPropia": "Jabetzakoa",
+      "opcionAlquiler": "Alokairua",
+      "opcionCedida": "Lagatakoa",
+      "cancelar": "Utzi",
+      "guardar": "Gorde"
+    }
+  },
+  "shared": {
+    "validations": {
+      "array": {
+        "max": "{{label}} debe tener como máximo {{max}} elementos eu",
+        "min": "{{label}} debe tener al menos {{min}} elementos eu"
+      },
+      "custom": {
+        "fileMaxSize": "{{label}} debe tener como tamaño máximo {{maxKb}} KB eu"
+      },
+      "date": {
+        "max": "{{label}} debe estar anterior a {{max}} eu",
+        "min": "{{label}} debe ser posterior a {{min}} eu"
+      },
+      "mixed": {
+        "default": "{{label}} es inválido eu",
+        "formatoCorreoIncorrecto": "Posta-formatua ez da zuzena",
+        "mensajeCampoObligatorio": "Nahitaezko eremua",
+        "mensajeCamposObligatorios": "Nahitaezko eremuak falta dira.",
+        "mensajeDocumentacionObligatoria": "Eskabideari dokumentazioa gehitu behar zaio",
+        "mensajeDosIntervinientesNecesarios": "Bigarren parte-hartzaile bat gehitu behar zaio eskabideari",
+        "notOneOf": "{{label}} no debe ser uno de los siguientes valores: {{values}} eu",
+        "notType": "{{label}} tiene un tipo incorrecto eu",
+        "oneOf": "{{label}} debe ser: {{values}} eu",
+        "required": "{{label}} es requerido eu"
+      },
+      "number": {
+        "integer": "{{label}} debe ser un entero eu",
+        "lessThan": "{{label}} debe ser menor que {{less}} eu",
+        "max": "{{label}} debe ser menor o igual que {{max}} eu",
+        "min": "{{label}} debe ser mayor o igual que {{min}} eu",
+        "moreThan": "{{label}} debe ser mayor que {{more}} eu",
+        "negative": "{{label}} debe ser un número negativo eu",
+        "positive": "{{label}} debe ser un número positivo eu"
+      },
+      "regex": {
+        "invalid": "Formato incorrecto. Ej: {{example} eu"
+      },
+      "string": {
+        "caracteresInvalidos": "{{label}}-k baimendu gabeko karaktereak ditu ^\\/:\"*<>|",
+        "email": "{{label}} debe ser un email válido eu",
+        "format": "{{label}} tiene un formato inválido eu",
+        "length": "{{label}} debe tener exactamente {{length}} carácteres eu",
+        "lowercase": "{{label}} debe ser una cadena en minúsculas eu",
+        "matches": "{{label}} debe coincidir con: \"{{regex}}\" eu",
+        "max": "{{label}} debe tener máximo {{max}} carácteres eu",
+        "min": "{{label}} debe tener al menos {{min}} carácteres eu",
+        "trim": "{{label}} debe ser una cadena sin espacios al inicio/fin eu",
+        "uppercase": "{{label}} debe ser una cadena en minúscula eu",
+        "url": "{{label}} debe ser una URL válida eu"
+      }
+    }
+  }
+}

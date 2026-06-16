@@ -1,0 +1,11 @@
+declare module '*.css'
+declare module '@tracasa/tracasa-components/styles'
+declare module '@tracasa/tracasa-components/styles/navarra'
+declare module '*.svg' {
+  const src: string
+  export default src
+}
+declare module '*.png' {
+  const src: string
+  export default src
+}
