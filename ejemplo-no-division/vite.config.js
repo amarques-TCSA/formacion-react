@@ -8,9 +8,14 @@ export default defineConfig({
         react(),
         mockDevServerPlugin(),
     ],
+    optimizeDeps: {
+        exclude: ['jsnlog', 'api-sitna'],
+    },
     resolve: {
         alias: [
             { find: '@', replacement: path.resolve(__dirname, 'src') },
+            { find: 'jsnlog', replacement: path.resolve(__dirname, 'src/shared/utils/jsnlog-shim.ts') },
+            { find: 'api-sitna', replacement: path.resolve(__dirname, 'src/shared/utils/api-sitna-shim.ts') },
         ]
     },
     server: {
