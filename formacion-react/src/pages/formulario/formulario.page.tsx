@@ -3,11 +3,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
 import {
-  BarraHerramientas,
-  BarraLateral,
   Button,
   Form,
-  IndiceLateral,
+  LayoutSPA,
   Main,
   SectionGroup,
 } from '@tracasa/tracasa-components';
@@ -58,44 +56,41 @@ export default function FormularioPage({ formularioRepository }: FormularioPageP
     onSubmit,
   });
 
+  const acciones = <><Button onClick={() => { }}>{t('palabras.cancelar')}</Button>
+          <Button
+            type="submit"
+            variant="principal"
+            conOpciones
+          >
+            {t('palabras.guardar')}
+          </Button>
+          </>;
+
   return (
     <Form
-      registro={registro}
-      onReset={reset}
-      onSubmit={onSubmit}
-      data-testid="buscador-expedientes-fiscalia-form"
-      onKeyDown={handleKeyPress}
-    >
-      <BarraHerramientas>
-        <Button onClick={() => { }}>{t('palabras.cancelar')}</Button>
-        <Button
-          type="submit"
-          variant="principal"
-          conOpciones
-        >
-          {t('palabras.guardar')}
-        </Button>
-      </BarraHerramientas>
+        registro={registro}
+        onReset={reset}
+        onSubmit={onSubmit}
+        data-testid="buscador-expedientes-fiscalia-form"
+        onKeyDown={handleKeyPress}
+      >
+        <LayoutSPA titulo={"Formulario"} accionesRender={acciones}>
+        <Main>
+          <SectionGroup>
+            <DatosPersonalesSection
+              control={control}
+              errors={errors}
+              formularioRepository={formularioRepository} />
 
-      <Main>
-        <SectionGroup>
-          <DatosPersonalesSection
-            control={control}
-            errors={errors}
-            formularioRepository={formularioRepository} />
+            <DocumentoIdentidadSection control={control} errors={errors} />
 
-          <DocumentoIdentidadSection control={control} errors={errors} />
-
-          <DomicilioSection
-            control={control}
-            formularioRepository={formularioRepository}
-          />
-        </SectionGroup>
-
-        <BarraLateral>
-          <IndiceLateral />
-        </BarraLateral>
-      </Main>
+            <DomicilioSection
+              control={control}
+              formularioRepository={formularioRepository}
+            />
+          </SectionGroup>
+        </Main>
+      </LayoutSPA>
     </Form>
   );
 }
