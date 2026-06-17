@@ -16,7 +16,7 @@ type BuscadorPageProps = {
 export default function BuscadorPage({
   apiRepository
 }: BuscadorPageProps) {
-  const { filtros } = useBuscadorStore();
+  const  filtros = useBuscadorStore(x => x.filtros);
 
   const registro = useForm<BuscadorForm>({
     resolver: yupResolver(schema),

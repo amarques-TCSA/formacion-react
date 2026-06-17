@@ -3,7 +3,10 @@ import { useBuscadorStore } from "../buscador.store";
 
 
 export default function BuscadorDetalleModal() {
-  const { modalAbierta, setModalAbierta, datosModal, setDatosModal } = useBuscadorStore();
+  const modalAbierta = useBuscadorStore(x => x.modalAbierta);
+  const setModalAbierta = useBuscadorStore(x => x.setModalAbierta);
+  const datosModal = useBuscadorStore(x => x.datosModal);
+  const setDatosModal = useBuscadorStore(x => x.setDatosModal);
 
   const cerrarModal = () => {
     setModalAbierta(false);

@@ -35,7 +35,9 @@ const columnas: CabeceraListado<Resultado>[] = [
 
 export default function BuscadorDatos({ apiRepository }: BuscadorDatosProps) {
   const { data: maestros } = ObtenerMaestrosBuscador({ apiRepository });
-  const { filtros, setModalAbierta, setDatosModal } = useBuscadorStore();
+  const filtros = useBuscadorStore(x => x.filtros);
+  const setModalAbierta = useBuscadorStore(x => x.setModalAbierta);
+  const setDatosModal = useBuscadorStore(x => x.setDatosModal);
 
   const queryResultadosBuscador = ObtenerResultadosBuscador({ apiRepository, filtros});
   const resultados = queryResultadosBuscador.data.resultados;
