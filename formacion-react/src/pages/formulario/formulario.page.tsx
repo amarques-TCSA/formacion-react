@@ -56,25 +56,26 @@ export default function FormularioPage({ formularioRepository }: FormularioPageP
     onSubmit,
   });
 
-  const acciones = <><Button onClick={() => { }}>{t('palabras.cancelar')}</Button>
-          <Button
-            type="submit"
-            variant="principal"
-            conOpciones
-          >
-            {t('palabras.guardar')}
-          </Button>
-          </>;
+  const acciones = <>
+    <Button onClick={() => { }}>{t('palabras.cancelar')}</Button>
+    <Button
+      type="submit"
+      variant="principal"
+      conOpciones
+    >
+      {t('palabras.guardar')}
+    </Button>
+  </>;
 
   return (
     <Form
-        registro={registro}
-        onReset={reset}
-        onSubmit={onSubmit}
-        data-testid="buscador-expedientes-fiscalia-form"
-        onKeyDown={handleKeyPress}
-      >
-        <LayoutSPA titulo={"Formulario"} accionesRender={acciones}>
+      registro={registro}
+      onReset={reset}
+      onSubmit={onSubmit}
+      data-testid="buscador-expedientes-fiscalia-form"
+      onKeyDown={handleKeyPress}
+    >
+      <LayoutSPA titulo={"Formulario"} accionesRender={acciones}>
         <Main>
           <SectionGroup>
             <DatosPersonalesSection
@@ -82,7 +83,10 @@ export default function FormularioPage({ formularioRepository }: FormularioPageP
               errors={errors}
               formularioRepository={formularioRepository} />
 
-            <DocumentoIdentidadSection control={control} errors={errors} />
+            <DocumentoIdentidadSection
+              control={control}
+              errors={errors}
+            />
 
             <DomicilioSection
               control={control}

@@ -6,6 +6,7 @@ import {
 
 import { Routes } from './shared/config/routing';
 import AppLayout from './app.layout';
+import HookVsFuncion from './pages/hook-vs-funcion/hook-vs-funcion';
 
 const Formulario = lazy(
   () => import('./pages/formulario/formulario'),
@@ -36,6 +37,10 @@ export default function AppRouter() {
         {
           path: Routes.queryVsSuspense.relativePath,
           element: <QueryVsSuspense />,
+        },
+        {
+          path: Routes.hookVsFuncion.relativePath,
+          element: <HookVsFuncion />,
         },
       ],
     },

@@ -18,14 +18,12 @@ type DatosPersonalesSectionProps = {
   control: Control<FormularioSeccionesForm>;
   errors: FieldErrors<FormularioSeccionesForm>;
   formularioRepository: IFormularioRepository;
-  register: any;
 };
 
 export default function DatosPersonalesSection({
   control,
   errors,
   formularioRepository,
-  register,
 }: DatosPersonalesSectionProps) {
 
   const { nacionalidades, estadosCiviles } = ObtenerFormularioMaestros({ formularioRepository });
@@ -34,13 +32,19 @@ export default function DatosPersonalesSection({
     <Section title={t('formulario.datosPersonales')} id="datosPersonales">
       <FormGrid>
         <FormField id="nombre" labelText={t('formulario.nombre')} error={errors.nombre}>
-
-          <Input
-            error={!!errors.nombre}
-            {...register("nombre")}
+          <Controller
+            name="nombre"
+            control={control}
+            render={({ field }) => (
+              <Input
+                id="nombre"
+                type="text"
+                value={field.value ?? ''}
+                onChange={field.onChange}
+                error={!!errors.nombre}
+              />
+            )}
           />
-
-
         </FormField>
 
         <FormField

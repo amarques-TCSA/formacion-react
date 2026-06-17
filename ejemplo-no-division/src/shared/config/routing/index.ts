@@ -23,6 +23,10 @@ const Routes = {
 		relativePath: 'query-vs-suspense',
 		absolutePath: '/query-vs-suspense',
 	},
+	hookVsFuncion: {
+		relativePath: 'hook-vs-funcion',
+		absolutePath: '/hook-vs-funcion',
+	},
 } as const satisfies Record<string, Route>;
 
 type RoutesType = typeof Routes;

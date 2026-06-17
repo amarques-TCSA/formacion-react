@@ -39,5 +39,8 @@ export const EnviarFormulario = ({ formularioRepository }: EnviarFormularioProps
     onSuccess: (response) => {
       console.log('Formulario enviado:', response);
     },
+    onError: (error) => {
+      console.error('Error al enviar el formulario:', error);
+    }
   });
 };
