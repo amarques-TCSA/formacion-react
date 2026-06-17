@@ -19,6 +19,10 @@ const Routes = {
 		relativePath: 'renderizados',
 		absolutePath: '/renderizados',
 	},
+	queryVsSuspense: {
+		relativePath: 'query-vs-suspense',
+		absolutePath: '/query-vs-suspense',
+	},
 } as const satisfies Record<string, Route>;
 
 type RoutesType = typeof Routes;

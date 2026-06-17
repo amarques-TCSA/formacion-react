@@ -13,6 +13,9 @@ const Formulario = lazy(
 const Renderizados = lazy(
   () => import('./pages/renderizados/renderizados'),
 );
+const QueryVsSuspense = lazy(
+  () => import('./pages/query-vs-suspense/query-vs-suspense'),
+);
 
 export default function AppRouter() {
 
@@ -29,6 +32,10 @@ export default function AppRouter() {
         {
           path: Routes.renderizados.relativePath,
           element: <Renderizados />,
+        },
+        {
+          path: Routes.queryVsSuspense.relativePath,
+          element: <QueryVsSuspense />,
         },
       ],
     },
