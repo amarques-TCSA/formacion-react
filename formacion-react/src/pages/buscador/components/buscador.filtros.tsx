@@ -28,7 +28,7 @@ export default function BuscadorFiltros({ apiRepository, registro }: BuscadorFil
     onSubmit,
   });
 
-  const { setFiltros } = useBuscadorStore();
+  const setFiltros = useBuscadorStore(x => x.setFiltros);
 
   const limpiarFiltros = () => {
     const filtrosLimpios = { ...filtrosPorDefecto };
